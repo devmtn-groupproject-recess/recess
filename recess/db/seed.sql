@@ -6,7 +6,7 @@ CREATE TABLE users (
     user_city VARCHAR,
     user_state VARCHAR,
     user_zip INTEGER,
-    user_phone INTEGER
+    user_phone VARCHAR
 );
 
 CREATE TABLE events (
@@ -16,8 +16,8 @@ CREATE TABLE events (
     event_date TIMESTAMP,
     event_creator_id INTEGER REFERENCES users(user_id),
     event_description TEXT,
-    event_location_lat INTEGER,
-    event_location_long INTEGER
+    event_location_lat DECIMAL,
+    event_location_long DECIMAL
 ) ;
 
 CREATE TABLE messages (
