@@ -40,11 +40,10 @@ app.put('/user/editUser/', usersCtrl.editUser)
 app.get('/user/getUser/:user_id', usersCtrl.getUser)
 
 
-app.get('/api/messages')
-app.get('/api/messages/:message_id')
-app.post('/api/messages')
-app.put('/api/messages/:message_id')
-app.delete('/api/messages/:message_id')
+app.get('/api/messages/:event_id', messagesCtrl.getMessages)
+app.post('/api/messages/:event_id', messagesCtrl.createMessage)
+app.put('/api/messages/:event_id/:message_id', messagesCtrl.editMessage)
+app.delete('/api/messages/:event_id/:message_id', messagesCtrl.deleteMessage)
 
 app.get('/api/events')
 app.get('/api/events/:event_id')
