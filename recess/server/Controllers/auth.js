@@ -59,5 +59,42 @@ module.exports = {
             console.log('There was an error in the register block (authCtrl)', error)
             res.status(500).send(error)
         }
+    }, 
+    login: async (req, res) => {
+        try{
+            const db = req.app.get('db')
+            let {username, password} = req.body
+
+            let users = await db.get_user_by_username(username)
+            let user = users[0]
+
+            if(!user) {
+                return res.status(401).send("Username or Password is incorrect")
+            }
+
+            let isAuthenticated = bcrypt.compareSync(password, user.password)
+
+            if(!isAuthenticated) {
+                return res.status(401).send("Username or Password is incorrect")
+            }
+            delete user.password
+            req.session.user = user
+            res.send(req.session.user)
+
+        }catch(error) {
+            console.log("There was an error in the login block (authCtrl)", error)
+            res.status(409).send(error)
+        }
+    },
+    logout: (req, res) => {
+        req.session.destroy()
+        res.status(200).send("Logged Out")
+    },
+    currentUser: (req,res) => {
+        if (req.session.user) {
+            res.send(req.session.user)
+        }else{
+            res.status(404).send("No User is logged in")
+        }
     }
 }
