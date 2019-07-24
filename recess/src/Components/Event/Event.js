@@ -1,9 +1,13 @@
 import React from 'react'
 import './Event.css'
+import io from 'socket.io-client'
 
 function Event() {
     return <div className='message-box'>
-      Hello World
+      <div className="googleMap">
+        <p>Event Info</p>
+      </div>
+      <div className="chatBox">ChatBox</div>
     </div>
   }
 
