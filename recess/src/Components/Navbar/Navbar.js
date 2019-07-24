@@ -5,12 +5,16 @@ import './Navbar.css'
 function Navbar() {
     return(
       <div>
-          <nav>
+          <nav className="navbar">
               <div>
-                  <Link to="/">Home</Link>
-                  <Link to="/login">Login</Link>
-                  <Link to="/event">Events</Link>
-                  <Link to="/profile">Profile</Link>
+              <label for="toggle" class="label">&#9776;</label>
+                <input type="checkbox" id="toggle"/>
+                <div class="menu">
+                  <Link to="/" className="words">Home</Link>
+                  <Link to="/event" className="words">Events</Link>
+                  <Link to="/profile" className="words">Profile</Link>
+                  <Link to="/login" className="words">Login</Link>
+                  </div>
               </div>
           </nav>
       </div>  
