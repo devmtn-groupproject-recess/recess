@@ -63,20 +63,28 @@ module.exports = {
     login: async (req, res) => {
         try{
             const db = req.app.get('db')
-            let {username, password} = req.body.loginInfo
+            console.log(req.body)
+            let {username, password} = req.body
 
             let users = await db.get_user_by_username(username)
             let user = users[0]
 
+            console.log('hit1')
+
             if(!user) {
                 return res.status(401).send("Username or Password is incorrect")
             }
+            console.log('hit2')
 
             let isAuthenticated = bcrypt.compareSync(password, user.password)
 
             if(!isAuthenticated) {
                 return res.status(401).send("Username or Password is incorrect")
             }
+
+            console.log('hit3')
+
+
             delete user.password
             req.session.user = user
             res.send(req.session.user)

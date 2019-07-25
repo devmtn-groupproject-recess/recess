@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import './Login.css'
 
-import {login} from '../../Redux/reducers/users'
+import {login, checkUser} from '../../Redux/reducers/users'
 
 
 
@@ -13,22 +14,22 @@ function Login(props) {
     password: ''
   })
 
+  useEffect(  () => {
+    props.checkUser()
+
+  }, []) 
+
   let handleChange = (event) => {
     const {name, value} = event.target
     setLoginInfo({
+      ...loginInfo,
       [name]: value 
     })
+    
   }
 
   let loginUser = async () => {
-    console.log('hit')
-    // login(loginInfo)
-    // setLoginInfo({
-    //   username:'',
-    //   password: ''
-    // })
-    let {username, password} = loginInfo
-    console.log(username, password)
+    const {username, password} = loginInfo
     if(username === '' || password === '') {
       return alert('Must enter a username and password')
     }
@@ -37,37 +38,52 @@ function Login(props) {
       username: '',
       password: ''
     })
-    props.history.push('/user/admin/api/cars')
+    props.history.push('/home')
   }
 
 
+  
   return (
     <div className='message-box'>
+      {props.users ?
+      
+      <Redirect to='/home' />
+
+      :
+      
+      <div>
         <h1>Welcome Back! Please Log in!</h1>
-        <div>
-          <input 
-            placeholder='Username'
-            type='text'
-            name='Username'
-            onChange={(event) => handleChange(event)}
-          />  
-          <input 
-            placeholder='Password'
-            type='text'
-            name='Password'
-            onChange={(event) => handleChange(event)}
-          />  
-          <button 
-           onClick={ () => loginUser()}>Login</button>
-        </div>
+        <input 
+          placeholder='Username'
+          type='text'
+          name='username'
+          onChange={(event) => handleChange(event)}
+        />  
+        <input 
+          placeholder='Password'
+          type='text'
+          name='password'
+          onChange={(event) => handleChange(event)}
+        />  
+        <button 
+         onClick={ () => loginUser()}>Login</button>
       </div>
+      }
+    </div>
 
   )
   
 }
 
 let mapDispatchToProps = {
-  login
+  login,
+  checkUser
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+let mapStateToProps = state => {
+  return{
+    users: state.users.data
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
