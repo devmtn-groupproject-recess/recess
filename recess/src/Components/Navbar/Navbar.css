@@ -11,6 +11,14 @@
     
 }
 
+.logo {
+    font-family: 'Black Ops One', cursive;
+    font-size:  25px;
+    color: gold;
+    margin:0;
+    padding: 0;
+}
+
 .words {
     text-decoration: none;
     margin: 15px;
@@ -20,10 +28,11 @@
 
 .label {
     color: white;
-    font-size: 28px;
-    line-height: 100px;
-    width: 26px;
-    margin-right: 40px;
+    font-size: 30px;
+    line-height: 30px;
+    width: 25px;
+    margin-right: 10px;
+    margin-top: 1px;
     float: right;
     display: none;
 }
@@ -32,7 +41,6 @@
     text-align: right;
     width: 100%;
     z-index: 10;
-    padding-top: 20px;
 }
 
 #toggle {

@@ -7,14 +7,15 @@ function Navbar() {
       <div>
           <nav className="navbar">
               <div>
-              <label for="toggle" class="label">&#9776;</label>
+                <a className="logo">RECESS</a>
+                <label for="toggle" class="label">&#9776;</label>
                 <input type="checkbox" id="toggle"/>
                 <div class="menu">
-                  <Link to="/" className="words">Home</Link>
+                  <Link to="/home" className="words">Home</Link>
                   <Link to="/event" className="words">Events</Link>
                   <Link to="/profile" className="words">Profile</Link>
-                  <Link to="/login" className="words">Login</Link>
-                  </div>
+                  <Link to="/" className="words">Logout</Link>
+                </div>
               </div>
           </nav>
       </div>  
