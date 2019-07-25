@@ -34,7 +34,7 @@ app.use(session({
 app.post('/auth/register', authCtrl.checkUser, authCtrl.register)
 app.post('/auth/login', authCtrl.login)
 app.get('/auth/logout', authCtrl.logout)
-app.get('/auth/currentUser', authCtrl.currentUser)
+// app.get('/auth/currentUser', authCtrl.currentUser)
 
 app.put('/user/editUser/', usersCtrl.editUser)
 app.get('/user/getUser/:user_id', usersCtrl.getUser)
