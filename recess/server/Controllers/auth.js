@@ -63,7 +63,7 @@ module.exports = {
     login: async (req, res) => {
         try{
             const db = req.app.get('db')
-            let {username, password} = req.body
+            let {username, password} = req.body.loginInfo
 
             let users = await db.get_user_by_username(username)
             let user = users[0]

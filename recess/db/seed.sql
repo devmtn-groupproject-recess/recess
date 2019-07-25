@@ -37,3 +37,13 @@ CREATE TABLE events_messages (
     message_id INTEGER REFERENCES messages(message_id),
     event_id INTEGER REFERENCES events(event_id)
 ) ;
+
+CREATE TABLE categories (
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR
+);
+
+CREATE TABLE users_categories (
+    category_id INTEGER REFERENCES categories(category_id),
+    user_id INTEGER REFERENCES users(user_id)
+); 
