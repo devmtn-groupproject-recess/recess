@@ -3,7 +3,7 @@ import './Login.css'
 
 function Login() {
     return <div className='message-box'>
-      Hello World
+      Login Page
     </div>
   }
 
