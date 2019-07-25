@@ -15,9 +15,9 @@ export default (
     <Switch>
     <Route exact path="/event" component={Event} />
     <Route exact path="/register" component={Register} />
-    <Route exact path="/" component={Home} />
+    <Route exact path="/home" component={Home} />
     <Route exact path="/profile" component={OwnProfile} />
-    <Route exact path="/login" component={Login} />
+    <Route exact path="/" component={Login} />
     <Route exact path="/otherprofile" component={OtherProfile} />
     </Switch>
 )
