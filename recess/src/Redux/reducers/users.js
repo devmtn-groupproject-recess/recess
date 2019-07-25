@@ -16,10 +16,10 @@ const EDIT_USER_PENDING = 'EDIT_USER_PENDING'
 const EDIT_USER_FULFILLED = 'EDIT_USER_FULFILLED'
 const EDIT_USER_REJECTED = 'EDIT_USER_REJECTED'
 
-const FIST_LOGIN = 'FIST_LOGIN'
-const FIST_LOGIN_PENDING = 'FIST_LOGIN_PENDING'
-const FIST_LOGIN_FULFILLED = 'FIST_LOGIN_FULFILLED'
-const FIST_LOGIN_REJECTED = 'FIST_LOGIN_REJECTED'
+const FIRST_LOGIN = 'FIST_LOGIN'
+const FIRST_LOGIN_PENDING = 'FIST_LOGIN_PENDING'
+const FIRST_LOGIN_FULFILLED = 'FIST_LOGIN_FULFILLED'
+const FIRST_LOGIN_REJECTED = 'FIST_LOGIN_REJECTED'
 
 const LOGOUT_USER = 'LOGOUT_USER'
 const LOGOUT_USER_PENDING = 'LOGOUT_USER_PENDING'
@@ -84,18 +84,18 @@ export default function (state = initialState, action) {
                 loading: false
             }
 
-        case FIST_LOGIN_PENDING:
+        case FIRST_LOGIN_PENDING:
             return {
                 ...state,
                 loading: true
             }
-        case FIST_LOGIN_FULFILLED:
+        case FIRST_LOGIN_FULFILLED:
             return{
                 ...state,
                 data:payload.data,
                 loading:false
             }
-        case FIST_LOGIN_REJECTED:
+        case FIRST_LOGIN_REJECTED:
             return {
                 ...state,
                 loading: false
