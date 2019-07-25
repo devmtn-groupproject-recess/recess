@@ -6,19 +6,44 @@ import {login} from '../../Redux/reducers/users'
 
 
 
-function Login() {
+function Login(props) {
 
   let [loginInfo, setLoginInfo] = useState({
     username: '',
     password: ''
   })
-  let [password, setPassword] = useState('')
 
+  let handleChange = (event) => {
+    const {name, value} = event.target
+    setLoginInfo({
+      [name]: value 
+    })
+  }
+
+  let loginUser = async () => {
+    console.log('hit')
+    // login(loginInfo)
+    // setLoginInfo({
+    //   username:'',
+    //   password: ''
+    // })
+    let {username, password} = loginInfo
+    console.log(username, password)
+    if(username === '' || password === '') {
+      return alert('Must enter a username and password')
+    }
+    await props.login(loginInfo)
+    setLoginInfo({
+      username: '',
+      password: ''
+    })
+    props.history.push('/user/admin/api/cars')
+  }
 
 
   return (
     <div className='message-box'>
-        {/* <h1>Welcome Back! Please Log in!</h1>
+        <h1>Welcome Back! Please Log in!</h1>
         <div>
           <input 
             placeholder='Username'
@@ -33,8 +58,8 @@ function Login() {
             onChange={(event) => handleChange(event)}
           />  
           <button 
-           onClick={ () => login(username, password)}>Login</button>
-        </div> */}
+           onClick={ () => loginUser()}>Login</button>
+        </div>
       </div>
 
   )
@@ -42,7 +67,7 @@ function Login() {
 }
 
 let mapDispatchToProps = {
-
+  login
 }
 
 export default connect(null, mapDispatchToProps)(Login);
