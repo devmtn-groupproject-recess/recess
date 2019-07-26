@@ -2,7 +2,7 @@ import React from 'react'
 import './Login.css'
 
 function Login() {
-    return <div className='message-box'>
+    return <div className='bg'>
       Login Page
     </div>
   }

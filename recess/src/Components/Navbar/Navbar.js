@@ -7,7 +7,7 @@ function Navbar() {
       <div>
           <nav className="navbar">
               <div>
-                <a className="logo">RECESS</a>
+                <i className="logo">RECESS</i>
                 <label for="toggle" class="label">&#9776;</label>
                 <input type="checkbox" id="toggle"/>
                 <div class="menu">
