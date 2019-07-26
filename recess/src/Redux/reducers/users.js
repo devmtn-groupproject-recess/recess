@@ -11,6 +11,11 @@ const GET_USER_PENDING = 'GET_USER_PENDING'
 const GET_USER_FULFILLED = 'GET_USER_FULFILLED'
 const GET_USER_REJECTED = 'GET_USER_REJECTED'
 
+const CHECK_USER = 'CHECK_USER'
+const CHECK_USER_PENDING = 'CHECK_USER_PENDING'
+const CHECK_USER_FULFILLED = 'CHECK_USER_FULFILLED'
+const CHECK_USER_REJECTED = 'CHECK_USER_REJECTED'
+
 const EDIT_USER = 'EDIT_USER'
 const EDIT_USER_PENDING = 'EDIT_USER_PENDING'
 const EDIT_USER_FULFILLED = 'EDIT_USER_FULFILLED'
@@ -31,7 +36,7 @@ const LOGIN_USER_PENDING = 'LOGIN_USER_PENDING'
 const LOGIN_USER_FULFILLED = 'LOGIN_USER_FULFILLED'
 const LOGIN_USER_REJECTED = 'LOGIN_USER_REJECTED'
 
-const REGISTER_USER = 'REGISTER_USER'
+const REGISTER_USER = 'REGISTER_USER' 
 const REGISTER_USER_PENDING = 'REGISTER_USER_PENDING'
 const REGISTER_USER_FULFILLED = 'REGISTER_USER_FULFILLED'
 const REGISTER_USER_REJECTED = 'REGISTER_USER_REJECTED'
@@ -48,6 +53,7 @@ const  GET_USERS_SUBSCRIBED_CATEGORIES_REJECTED= 'GET_USERS_SUBSCRIBED_CATEGORIE
 
 export default function (state = initialState, action) {
     let {type, payload} = action
+    console.log(action)
 
     switch(type) {
         case GET_USER_PENDING:
@@ -130,6 +136,8 @@ export default function (state = initialState, action) {
                 loading:false
             }
         case LOGIN_USER_REJECTED:
+            alert("Username or Password is Incorrect")
+
             return {
                 ...state,
                 loading: false
@@ -202,6 +210,23 @@ export default function (state = initialState, action) {
                 ...state,
                 loading: false
             }
+
+        case CHECK_USER_PENDING:
+            return {
+                ...state,
+                loading: true
+            }
+        case CHECK_USER_FULFILLED:
+            return{
+                ...state,
+                data: payload,
+                loading:false
+            }
+        case CHECK_USER_REJECTED:
+            return {
+                ...state,
+                loading: false
+            }
         
         default:
             return state
@@ -261,5 +286,12 @@ export function firstLogin(user) {
     return{
         type: FIRST_LOGIN,
         payload: user
+    }
+}
+
+export function checkUser() {
+    return {
+        type: CHECK_USER,
+        payload: Axios.get(`auth/currentUser`)
     }
 }
