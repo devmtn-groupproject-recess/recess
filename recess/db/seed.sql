@@ -6,7 +6,8 @@ CREATE TABLE users (
     user_city VARCHAR,
     user_state VARCHAR,
     user_zip INTEGER,
-    user_phone VARCHAR
+    user_phone VARCHAR,
+    user_img TEXT
 );
 
 CREATE TABLE events (
