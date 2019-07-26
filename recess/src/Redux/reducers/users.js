@@ -155,6 +155,7 @@ export default function (state = initialState, action) {
                 loading:false
             }
         case REGISTER_USER_REJECTED:
+            alert("Username is already in use. Please choose another username.")
             return {
                 ...state,
                 loading: false
@@ -234,6 +235,7 @@ export default function (state = initialState, action) {
 }
 
 export function register(userInfo) {
+    
     return {
         type: REGISTER_USER,
         payload: Axios.post(`/auth/register`, userInfo)
