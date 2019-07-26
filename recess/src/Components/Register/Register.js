@@ -68,7 +68,7 @@ function Register(props) {
       :
       
       <div>
-        <h1>Welcome Back! Please Log in!</h1>
+        <h1>Welcome To Recess! Please Create An Account!</h1>
         <input 
           placeholder='First Name'
           type='text'
@@ -131,9 +131,11 @@ function Register(props) {
         />  
         
         <button 
-         onClick={ () => handleRegister()}>Create</button>
+         onClick={ () => handleRegister()}>Register Account</button>
       </div>
       }
+      <p 
+      onClick={ () => props.history.push('/')}>Already have an account?</p>
     </div>
 
   )

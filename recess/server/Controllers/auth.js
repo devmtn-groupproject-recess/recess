@@ -103,6 +103,7 @@ module.exports = {
     },
     currentUser: (req,res) => {
         if (req.session.user) {
+            console.log(req.session.user)
             res.send(req.session.user)
         }else{
             res.status(404).send("No User is logged in")

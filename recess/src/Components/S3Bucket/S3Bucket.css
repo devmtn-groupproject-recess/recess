@@ -1,0 +1,54 @@
+.s3Bucket {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3% 0;
+}
+
+#chooseImg {
+    width: 80%;
+}
+
+.uploadButton {
+    width: 18%;
+    margin: 0 4%;
+}
+
+.inputfile + label {
+    font-size: 12px;
+    background: #6067ed;
+    border-radius: 7px;
+    border: none;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: #fffdee
+ }
+ 
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #5057d8;
+ }
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+@media screen and (min-width: 415px) {
+    .inputfile + label {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 375px){
+    .inputfile + label {
+        font-size: 12px;
+    }
+}
