@@ -4,7 +4,7 @@ module.exports = {
     checkUser: async(req, res, next) => {
         try {
             const db = req.app.get('db')
-            const {username} = req.body.userInfo
+            const {username} = req.body
 
             let users = await db.get_user_by_username(username)
             let user = users[0]
@@ -30,8 +30,9 @@ module.exports = {
                 user_zip,
                 user_phone,
                 username,
-                password
-            } = req.body.userInfo
+                password,
+                user_img
+            } = req.body
 
             const salt = bcrypt.genSaltSync(10)
             const hash = bcrypt.hashSync(password, salt)
@@ -45,7 +46,8 @@ module.exports = {
                 user_zip,
                 user_phone,
                 username,
-                password: hash
+                password: hash,
+                user_img
             })
 
             let newUser = response[0]
