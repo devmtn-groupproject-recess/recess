@@ -40,8 +40,8 @@ function Login(props) {
     })
     props.history.push('/home')
   }
-
-
+  
+  
   
   return (
     <div className='message-box'>
@@ -64,11 +64,12 @@ function Login(props) {
           type='text'
           name='password'
           onChange={(event) => handleChange(event)}
-        />  
+          />  
         <button 
          onClick={ () => loginUser()}>Login</button>
       </div>
       }
+      <p onClick={ () => props.history.push('/register')}>Need an account?</p>
     </div>
 
   )
@@ -87,3 +88,4 @@ let mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
