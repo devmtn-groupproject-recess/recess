@@ -25,13 +25,13 @@ function Home(props) {
           {events &&
           events.map( singleEvent => {
             console.log(singleEvent)
-            let time = singleEvent.event_date.toLocaleTimeString('mt-US')
-            console.log(3333, time)
+            // let time = singleEvent.event_date.toLocaleTimeString('mt-US')
+            // console.log(3333, time)
               return(
                 <div>
                   <h3>{singleEvent.event_name}</h3>
                   <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
-                  <p>{time}</p>
+                  {/* <p>{time}</p> */}
                 </div>
               )
             })
