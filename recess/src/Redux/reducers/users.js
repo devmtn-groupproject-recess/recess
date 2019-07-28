@@ -115,7 +115,7 @@ export default function (state = initialState, action) {
         case LOGOUT_USER_FULFILLED:
             return{
                 ...state,
-                data:payload.data,
+                data:null,
                 loading:false
             }
         case LOGOUT_USER_REJECTED:
@@ -252,7 +252,7 @@ export function login(loginInfo) {
 export function logout() {
     return {
         type: LOGOUT_USER,
-        payload: Axios.post(`auth/logout`)
+        payload: Axios.get(`auth/logout`)
     }
 }
 
