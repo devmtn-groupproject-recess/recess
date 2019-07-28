@@ -51,7 +51,7 @@ function Login(props) {
 
       :
       
-      <div>
+      <div className="loginBox">
         <h1>Welcome Back! Please Log in!</h1>
         <input 
           placeholder='Username'

@@ -219,7 +219,7 @@ export function subscribeToEvent(event_id) {
     }
 }
 
-export function unsubscribeToEvend(event_id) {
+export function unsubscribeToEvent(event_id) {
     return {
         type: UNSUBSCRIBE_TO_EVENT,
         payload: Axios.post(`/api/events/${event_id}`)
