@@ -5,8 +5,6 @@ import './Login.css'
 
 import {login, checkUser} from '../../Redux/reducers/users'
 
-
-
 function Login(props) {
 
   let [loginInfo, setLoginInfo] = useState({
@@ -69,7 +67,6 @@ function Login(props) {
          onClick={ () => loginUser()}>Login</button>
       </div>
       }
-      <p onClick={ () => props.history.push('/register')}>Need an account?</p>
     </div>
 
   )
