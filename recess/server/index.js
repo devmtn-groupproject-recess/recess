@@ -4,7 +4,9 @@ const session = require('express-session')
 const socket = require('socket.io');
 require('dotenv').config()
 const massive = require('massive')
-const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env
+const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, AWS_ACCESS_KEY_PRIVATE, AWS_ACCESS_KEY_PUBLIC, AWS_REGION, S3_BUCKET } = process.env
+const AWS = require('aws-sdk')
+
 
 const authCtrl = require('./Controllers/auth')
 const eventsCtrl = require('./Controllers/events')
@@ -21,10 +23,15 @@ massive(CONNECTION_STRING).then( db => {
     const io = socket(app.listen(SERVER_PORT, () => {
         console.log(`Server is listening on port: ${SERVER_PORT}`)
     }))
-
-    
-
 })
+
+AWS.config.update({
+    accessKeyId: AWS_ACCESS_KEY_PUBLIC,
+    secretAccessKey: AWS_ACCESS_KEY_PRIVATE,
+    region: AWS_REGION
+})
+
+const S3 = new AWS.S3()
 
 app.use(session({
     secret: SESSION_SECRET,
@@ -34,6 +41,33 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 365
     }
 }))
+
+app.post('/api/s3', (req, res) => {
+    const photo = req.body
+
+    const buf = new Buffer(photo.file.replace(/^data:image\/\w+;base64,/, ''), 'base64')
+
+    const params = {
+        Bucket: S3_BUCKET,
+        Body: buf,
+        Key: photo.fileName,
+        ContentType: photo.fileType,
+        ACL: 'public-read'
+    }
+
+    S3.upload(params, (err, data) => {
+        console.log(222222, err)
+        let response, code;
+        if(err) {
+            response = err;
+            code = 500
+        }else {
+            response = data;
+            code = 200
+        }
+        res.status(code).send(response)
+    })
+})
 
 app.post('/auth/register', authCtrl.checkUser, authCtrl.register)
 app.post('/auth/login', authCtrl.login)

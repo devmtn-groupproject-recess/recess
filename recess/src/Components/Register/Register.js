@@ -160,6 +160,7 @@ import './Register.css'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {checkUser, register} from '../../Redux/reducers/users'
+import AmazonS3 from '../S3Bucket/S3Bucket'
 
 
 
@@ -212,9 +213,15 @@ function Register(props) {
       user_img: ''
     })
     props.history.push('/home')
-}
-
-
+  }
+  
+  let setUserPic = (url) => {
+    setRegisterInfo({
+      ...registerInfo,
+      user_img: url
+    })
+    console.log(registerInfo.user_img)
+  }
   
   return (
     <div className='message-box'>
@@ -225,7 +232,17 @@ function Register(props) {
       :
       
       <div>
-        <h1>Welcome Back! Please Log in!</h1>
+        <h1>Welcome! Please Create An Account!</h1>
+        {registerInfo.user_img ?
+        
+        <img src={registerInfo.user_img} />
+
+        :
+
+        <img src='https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg' />
+
+        }
+        <AmazonS3 setUserPic={setUserPic} />
         <input 
           placeholder='First Name'
           type='text'
@@ -268,12 +285,12 @@ function Register(props) {
           name='user_phone'
           onChange={(event) => handleChange(event)}
         />  
-        <input 
+        {/* <input 
           placeholder='Image Url'
           type='text'
           name='user_img'
           onChange={(event) => handleChange(event)}
-        />  
+        />   */}
         <input 
           placeholder='Username'
           type='text'
@@ -291,6 +308,7 @@ function Register(props) {
          onClick={ () => handleRegister()}>Create</button>
       </div>
       }
+      <p onClick={() => props.history.push('/')}>Already Have An Account? Log In Here.</p>
     </div>
 
   )
