@@ -26,20 +26,17 @@ function Event(props) {
         {props.event &&
           <div>
             <div className="googleMap">
-              Map Goes Here
+              <h1>Map Goes Here</h1>            
             </div>
             <div className="eventInfo">
 
-              <h3>Event Information</h3>
-              <p>{event.event_name}</p>
-              <p>{new Date(event.event_date).toLocaleTimeString()}</p>
-              <p>{event.event_name}</p>
-              <p>{event.event_name}</p>
-              <p>{event.event_name}</p>
-              <p>{event.event_name}</p>
-              <p>{event.event_name}</p>
+              <h3>{event.event_name}</h3>
+              <p><b>Date</b>: {new Date(event.event_date).toLocaleDateString()}</p>
+              <p><b>Time</b>: {new Date(event.event_date).toLocaleTimeString()}</p>
+              <p> <b>Description</b>: {event.event_description}</p>
+              <p><b>Location</b>: {`${event.event_city}, ${event.event_state}`}</p>
             </div>
-            <div className="chatBox">ChatBox</div>
+            <div className="chatBox"><h1>Chat Box Goes Here</h1></div>
           </div>
         }
 

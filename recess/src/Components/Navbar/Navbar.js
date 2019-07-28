@@ -9,7 +9,6 @@ function Navbar(props) {
   let handleLogout = () => {
     console.log("hit")
     props.logout()
-    props.history.push('/')
   }
     return(
       <div>
