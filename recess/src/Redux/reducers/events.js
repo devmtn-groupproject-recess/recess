@@ -208,7 +208,7 @@ export function getEvent(event_id) {
 export function getSubscribedEvents() {
     return {
         type: GET_SUBSCRIBED_EVENTS,
-        payload: Axios.post(`/api/events`)
+        payload: Axios.get(`/api/subscribed_events`)
     }
 }
 
