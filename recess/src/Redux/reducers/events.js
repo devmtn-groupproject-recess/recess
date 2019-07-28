@@ -47,7 +47,8 @@ const DELETE_EVENT_FULFILLED = 'DELETE_EVENT_FULFILLED'
 const DELETE_EVENT_REJECTED = 'DELETE_EVENT_REJECTED'
 
 export default function (state = initialState, action) {
-    const {type, payload} = action
+    console.log(action)
+    let {type, payload} = action
 
     switch(type) {
         case GET_EVENTS_PENDING:
@@ -199,9 +200,10 @@ export function getEvents() {
 }
 
 export function getEvent(event_id) {
+    console.log("hit")
     return {
         type: GET_EVENT,
-        payload: Axios.post(`/api/events/${event_id}`)
+        payload: Axios.get(`/api/events/${event_id}`)
     }
 }
 
