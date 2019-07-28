@@ -1,33 +1,38 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .navbar {
     width: 100%;
     height: 75px;
-    background-image: linear-gradient(to bottom right, indigo, yellow);
-    
+    background-image: linear-gradient(to bottom right, indigo, whitesmoke, white);
+    border-bottom: 3px inset indigo
+}
+
+.pic {
+    height: 70px;
+    width: 70px;
 }
 
 .logo {
     font-family: 'Black Ops One', cursive;
     font-size:  25px;
     color: gold;
-    margin:0;
+    margin-top:0;
+    margin-left: 5px;
     padding: 0;
+    height: 50px;
+    width: 50px;
+    z-index: 1;
+   
 }
 
 .words {
     text-decoration: none;
     margin: 15px;
     font-family: 'Oswald', sans-serif;
-    color: gold;
+    color: indigo;
+
 }
 
 .label {
-    color: white;
+    color: indigo;
     font-size: 30px;
     line-height: 30px;
     width: 25px;
@@ -41,6 +46,7 @@
     text-align: right;
     width: 100%;
     z-index: 10;
+    
 }
 
 #toggle {
@@ -49,7 +55,8 @@
 
 @media screen and (max-width: 500px) {
     .label {
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
     .menu {
         text-align: center;
@@ -60,8 +67,9 @@
     }
     .menu a {
         display: block;
-        background-color: indigo;
+        background-color: whitesmoke;
         margin: 0;
+        z-index: 10;
     }
 
     #toggle:checked + .menu {
