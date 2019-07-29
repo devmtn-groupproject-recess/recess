@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Axios from 'axios'
 import {connect} from 'react-redux'
 
-// import './s3Bucket.css'
+import './S3Bucket.css'
 
 class S3Bucket extends Component {
     constructor(props) {
