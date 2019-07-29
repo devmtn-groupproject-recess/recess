@@ -1,8 +1,10 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.loginBox {
+    height: 300px;
+    width: 300px;
+    border: 6px solid indigo;
+    border-radius: 10%;
 }
+
 
 @media screen and (max-width: 500px) {
    
