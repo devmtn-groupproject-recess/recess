@@ -22,8 +22,47 @@ function Home(props) {
       { props.user ?
         <div>
           <h1>Events I'm Going To:</h1>
-          {events && events!== true &&
+          {/* {events && events!== true &&
           events.map( (singleEvent, index) => {
+            console.log(singleEvent)
+            let timeDate = new Date(singleEvent.event_date)
+            let showTime = timeDate.toLocaleTimeString()
+            let showDate = timeDate.toLocaleDateString()
+
+              return(
+                <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
+                  <h3>{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
+                  <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
+                  <p>{`${showDate} ${showTime}`}</p>
+                </div>
+              )
+            })
+          } */}
+          {events && events!== true &&
+          events.filter( se => {
+            return new Date(se.event_date) > new Date()
+          })
+          .map( (singleEvent, index) => {
+            console.log(singleEvent)
+            let timeDate = new Date(singleEvent.event_date)
+            let showTime = timeDate.toLocaleTimeString()
+            let showDate = timeDate.toLocaleDateString()
+
+              return(
+                <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
+                  <h3>{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
+                  <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
+                  <p>{`${showDate} ${showTime}`}</p>
+                </div>
+              )
+            })
+          }
+          <h1>Events I've Gone To:</h1>
+          {events && events!== true &&
+          events.filter( se => {
+            return new Date(se.event_date) < new Date()
+          })
+          .map( (singleEvent, index) => {
             console.log(singleEvent)
             let timeDate = new Date(singleEvent.event_date)
             let showTime = timeDate.toLocaleTimeString()
