@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import './Event.css'
 import io from 'socket.io-client'
-import {getEvent} from '../../Redux/reducers/events'
+import {getEvent, checkUserSubscribedEvents, subscribeToEvent, unsubscribeToEvent} from '../../Redux/reducers/events'
 import {checkUser} from '../../Redux/reducers/users'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
@@ -11,9 +11,17 @@ function Event(props) {
   useEffect(   () => {
     // props.getSubscribedEvents()
     props.checkUser()
-
+    props.checkUserSubscribedEvents(props.match.params.event_id)
     props.getEvent(props.match.params.event_id)
   }, [])
+
+  let handleSubscribeToEvent = () => {
+    props.subscribeToEvent(props.match.params.event_id)
+  }
+
+  let handleUnsubscribeToEvent = () => {
+    props.unsubscribeToEvent(props.match.params.event_id)
+  }
 
   console.log(props)
 
@@ -31,10 +39,20 @@ function Event(props) {
             <div className="eventInfo">
 
               <h3>{event.event_name}</h3>
+              <p><b>Sport Type</b>: {event.event_type}</p>
               <p><b>Date</b>: {new Date(event.event_date).toLocaleDateString()}</p>
               <p><b>Time</b>: {new Date(event.event_date).toLocaleTimeString()}</p>
               <p> <b>Description</b>: {event.event_description}</p>
               <p><b>Location</b>: {`${event.event_city}, ${event.event_state}`}</p>
+              {props.subscribedEvent ?
+
+              <button onClick={() => handleSubscribeToEvent()}>Unsubscribe</button>
+
+              :
+
+            
+              <button onClick={ () => handleUnsubscribeToEvent()}>Subscribe</button>
+              }
             </div>
             <div className="chatBox"><h1>Chat Box Goes Here</h1></div>
           </div>
@@ -56,13 +74,17 @@ let mapStateToProps = state => {
   console.log(state)
   return {
     event: state.events.selected,
-    user: state.users.data
+    user: state.users.data,
+    subscribedEvent: state.events.data
   }
 }
 
 let mapDispatchToProps = {
   getEvent,
-  checkUser
+  checkUser, 
+  checkUserSubscribedEvents,
+  subscribeToEvent,
+  unsubscribeToEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);
