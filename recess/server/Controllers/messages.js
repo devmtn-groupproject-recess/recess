@@ -31,7 +31,10 @@ module.exports = {
             const {user_id} = req.session.user
     
             const newMessages = await db.add_message({user_id, message_content, event_id, message_date:dateTime})
-    
+            const {message_id} = newMessages[newMessages.length -1]
+            console.log(message_id)
+            await db.add_events_messages({event_id, message_id})
+
             res.status(200).send(newMessages)
 
         }catch(error) {
