@@ -93,4 +93,5 @@ app.delete('/api/events/unsubscribe/:event_id', eventsCtrl.unsubscribeToEvent)
 app.post('/api/events', eventsCtrl.addEvent)
 app.put('/api/events/:event_id', eventsCtrl.editEvent)
 app.delete('/api/events/:event_id', eventsCtrl.deleteEvent)
-// app.get('/api/events/checkSubscribed/:event_id', eventsCtrl.checkSubscribedEvents)
+app.get('/api/check_user_subscribed_events/:event_id', eventsCtrl.checkUserSubscribedEvents)
+

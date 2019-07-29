@@ -11,10 +11,17 @@ const GET_EVENTS_PENDING = 'GET_EVENTS_PENDING'
 const GET_EVENTS_FULFILLED = 'GET_EVENTS_FULFILLED'
 const GET_EVENTS_REJECTED = 'GET_EVENTS_REJECTED'
 
+
+
 const GET_EVENT = 'GET_EVENT'
 const GET_EVENT_PENDING = 'GET_EVENT_PENDING'
 const GET_EVENT_FULFILLED = 'GET_EVENT_FULFILLED'
 const GET_EVENT_REJECTED = 'GET_EVENT_REJECTED'
+
+const CHECK_SUBSCRIBED_EVENT = 'CHECK_SUBSCRIBED_EVENT'
+const CHECK_SUBSCRIBED_EVENT_PENDING = 'CHECK_SUBSCRIBED_EVENT_PENDING'
+const CHECK_SUBSCRIBED_EVENT_FULFILLED = 'CHECK_SUBSCRIBED_EVENT_FULFILLED'
+const CHECK_SUBSCRIBED_EVENT_REJECTED = 'CHECK_SUBSCRIBED_EVENT_REJECTED'
 
 const GET_SUBSCRIBED_EVENTS = 'GET_SUBSCRIBED_EVENTS'
 const GET_SUBSCRIBED_EVENTS_PENDING = 'GET_SUBSCRIBED_EVENTS_PENDING'
@@ -187,6 +194,23 @@ export default function (state = initialState, action) {
                 loading: false
             }
 
+        case CHECK_SUBSCRIBED_EVENT_PENDING:
+            return {
+                ...state,
+                loading: true
+            }
+        case CHECK_SUBSCRIBED_EVENT_FULFILLED:
+            return{
+                ...state,
+                data:payload.data,
+                loading:false
+            }
+        case CHECK_SUBSCRIBED_EVENT_REJECTED:
+            return {
+                ...state,
+                loading: false
+            }
+
         default: 
             return state
     }
@@ -209,8 +233,15 @@ export function getEvent(event_id) {
 
 export function getSubscribedEvents() {
     return {
-        type: GET_SUBSCRIBED_EVENTS,
+        type: CHECK_SUBSCRIBED_EVENT,
         payload: Axios.get(`/api/subscribed_events`)
+    }
+}
+
+export function checkUserSubscribedEvents(event_id){
+    return {
+        type: CHECK_SUBSCRIBED_EVENT,
+        payload: Axios.get(`/api/check_user_subscribed_events/${event_id}`)
     }
 }
 
@@ -224,7 +255,7 @@ export function subscribeToEvent(event_id) {
 export function unsubscribeToEvent(event_id) {
     return {
         type: UNSUBSCRIBE_TO_EVENT,
-        payload: Axios.post(`/api/events/${event_id}`)
+        payload: Axios.delete(`/api/events/unsubscribe/${event_id}`)
     }
 }
 
@@ -238,13 +269,13 @@ export function createEvent(eventInfo) {
 export function editEvent(event_id, eventInfo) {
     return {
         type: EDIT_EVENT,
-        payload: Axios.post(`/api/events/${event_id}`, eventInfo)
+        payload: Axios.put(`/api/events/${event_id}`, eventInfo)
     }
 }
 
 export function deleteEvent(event_id) {
     return {
         type: DELETE_EVENT,
-        payload: Axios.post(`/api/events/${event_id}`)
+        payload: Axios.delete(`/api/events/${event_id}`)
     }
 }
