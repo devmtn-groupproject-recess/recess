@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import './Event.css'
 import io from 'socket.io-client'
-import {getEvent, checkUserSubscribedEvents, subscribeToEvent, unsubscribeToEvent} from '../../Redux/reducers/events'
+import {getEvent, checkUserSubscribedEvents, subscribeToEvent, unsubscribeToEvent, deleteEvent} from '../../Redux/reducers/events'
 import {checkUser} from '../../Redux/reducers/users'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
@@ -24,6 +24,11 @@ function Event(props) {
     props.history.push('/home')
   }
 
+  let handleDelete = () => {
+    props.deleteEvent(props.match.params.event_id)
+    props.history.push('/home')
+  }
+
   console.log(props)
 
   let {event} = props
@@ -38,25 +43,32 @@ function Event(props) {
               <h1>Map Goes Here</h1>            
             </div>
             <div className="eventInfo">
-
+              
               <h3>{event.event_name}</h3>
               <p><b>Sport Type</b>: {event.event_type}</p>
               <p><b>Date</b>: {new Date(event.event_date).toLocaleDateString()}</p>
               <p><b>Time</b>: {new Date(event.event_date).toLocaleTimeString()}</p>
               <p> <b>Description</b>: {event.event_description}</p>
               <p><b>Location</b>: {`${event.event_city}, ${event.event_state}`}</p>
-              {props.subscribedEvent ?
+              <button onClick={() => props.history.push('/')}>Back</button>
+              {new Date(event.event_date) > new Date() &&
+                <div>
+                  {props.subscribedEvent ?
+  
+                  <button onClick={() => handleUnsubscribeToEvent()}>Unsubscribe</button>
+  
+                  :
+                
+                  <button onClick={ () => handleSubscribeToEvent()}>Subscribe</button>
+                  }
+  
+                  {Number(event.event_creator_id) === Number(props.user.data.user_id) &&
+  
+                  <button onClick={ () => handleDelete()} >Delete Event</button>  
+  
+                  }
 
-              <button onClick={() => handleUnsubscribeToEvent()}>Unsubscribe</button>
-
-              :
-
-            
-              <button onClick={ () => handleSubscribeToEvent()}>Subscribe</button>
-              }
-              {event.event_creator_id === props.user.user_id &&
-
-              <p>You Created This Event</p>
+                </div>
 
               }
             </div>
@@ -90,7 +102,8 @@ let mapDispatchToProps = {
   checkUser, 
   checkUserSubscribedEvents,
   subscribeToEvent,
-  unsubscribeToEvent
+  unsubscribeToEvent,
+  deleteEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);

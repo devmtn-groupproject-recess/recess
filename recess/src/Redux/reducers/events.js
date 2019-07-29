@@ -269,13 +269,13 @@ export function createEvent(eventInfo) {
 export function editEvent(event_id, eventInfo) {
     return {
         type: EDIT_EVENT,
-        payload: Axios.post(`/api/events/${event_id}`, eventInfo)
+        payload: Axios.put(`/api/events/${event_id}`, eventInfo)
     }
 }
 
 export function deleteEvent(event_id) {
     return {
         type: DELETE_EVENT,
-        payload: Axios.post(`/api/events/${event_id}`)
+        payload: Axios.delete(`/api/events/${event_id}`)
     }
 }
