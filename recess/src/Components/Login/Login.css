@@ -1,8 +1,55 @@
+.bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://recess-group.s3-us-west-2.amazonaws.com/7602065_sports-and-recreation-la-palmas-central-park-scott-feinblatt.jpg');
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 .loginBox {
     height: 300px;
     width: 300px;
     border: 6px solid indigo;
     border-radius: 10%;
+    text-align: center;
+    background-image: linear-gradient(to bottom right, indigo, white);
+    font-family: 'Black Ops One', cursive;
+    color: gold;
+}
+
+.username {
+    border: 5px solid indigo;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+.password {
+    border: 5px solid indigo;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+.btn {
+    height: 40px;
+    width: 60px;
+    border-radius: 12px;
+    background-color: indigo;
+    margin: 10px;
+    font-family: 'Black Ops One', cursive;
+    color: gold;
+    border: 5px solid indigo;
+}
+
+.register {
+    text-decoration: underline;
+    color: indigo
+}
+
+.regText {
+    margin: 10px;
 }
 
 
