@@ -21,6 +21,7 @@ function Event(props) {
 
   let handleUnsubscribeToEvent = () => {
     props.unsubscribeToEvent(props.match.params.event_id)
+    props.history.push('/home')
   }
 
   console.log(props)
@@ -46,12 +47,17 @@ function Event(props) {
               <p><b>Location</b>: {`${event.event_city}, ${event.event_state}`}</p>
               {props.subscribedEvent ?
 
-              <button onClick={() => handleSubscribeToEvent()}>Unsubscribe</button>
+              <button onClick={() => handleUnsubscribeToEvent()}>Unsubscribe</button>
 
               :
 
             
-              <button onClick={ () => handleUnsubscribeToEvent()}>Subscribe</button>
+              <button onClick={ () => handleSubscribeToEvent()}>Subscribe</button>
+              }
+              {event.event_creator_id === props.user.user_id &&
+
+              <p>You Created This Event</p>
+
               }
             </div>
             <div className="chatBox"><h1>Chat Box Goes Here</h1></div>

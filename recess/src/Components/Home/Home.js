@@ -22,7 +22,7 @@ function Home(props) {
       { props.user ?
         <div>
           <h1>Events I'm Going To:</h1>
-          {events &&
+          {events && events!== true &&
           events.map( (singleEvent, index) => {
             console.log(singleEvent)
             let timeDate = new Date(singleEvent.event_date)
