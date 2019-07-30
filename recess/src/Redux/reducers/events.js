@@ -248,7 +248,7 @@ export function checkUserSubscribedEvents(event_id){
 export function subscribeToEvent(event_id) {
     return {
         type: SUBSCRIBE_TO_EVENT,
-        payload: Axios.post(`/api/events/${event_id}`)
+        payload: Axios.post(`/api/events/subscribe/${event_id}`)
     }
 }
 
@@ -260,6 +260,7 @@ export function unsubscribeToEvent(event_id) {
 }
 
 export function createEvent(eventInfo) {
+    console.log(eventInfo)
     return {
         type: CREATE_EVENT,
         payload: Axios.post(`/api/events`, eventInfo)

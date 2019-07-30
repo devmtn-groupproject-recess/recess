@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import './Event.css'
 import io from 'socket.io-client'
 import {getEvent, checkUserSubscribedEvents, subscribeToEvent, unsubscribeToEvent, deleteEvent} from '../../Redux/reducers/events'
@@ -9,7 +9,6 @@ import {Redirect} from 'react-router-dom'
 function Event(props) {
 
   useEffect(   () => {
-    // props.getSubscribedEvents()
     props.checkUser()
     props.checkUserSubscribedEvents(props.match.params.event_id)
     props.getEvent(props.match.params.event_id)
@@ -17,6 +16,8 @@ function Event(props) {
 
   let handleSubscribeToEvent = () => {
     props.subscribeToEvent(props.match.params.event_id)
+    props.history.push('/home')
+
   }
 
   let handleUnsubscribeToEvent = () => {
@@ -28,13 +29,12 @@ function Event(props) {
     props.deleteEvent(props.match.params.event_id)
     props.history.push('/home')
   }
-
-  console.log(props)
-
+  
   let {event} = props
+
   
   return (
-    <div className='message-box'>
+    <div className='message-box'> 
       {props.user ?
       <div>
         {props.event &&
@@ -50,7 +50,7 @@ function Event(props) {
               <p><b>Time</b>: {new Date(event.event_date).toLocaleTimeString()}</p>
               <p> <b>Description</b>: {event.event_description}</p>
               <p><b>Location</b>: {`${event.event_city}, ${event.event_state}`}</p>
-              <button onClick={() => props.history.push('/')}>Back</button>
+              <button onClick={() => window.history.back()}>Back</button>
               {new Date(event.event_date) > new Date() &&
                 <div>
                   {props.subscribedEvent ?
