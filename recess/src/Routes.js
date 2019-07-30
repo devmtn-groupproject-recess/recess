@@ -8,6 +8,7 @@ import OwnProfile from './Components/OwnProfile/OwnProfile'
 import OtherProfile from './Components/OtherProfile/OtherProfile'
 import Login from './Components/Login/Login'
 import CreateEvent from './Components/CreateEvent/CreateEvent'
+import EditProfile from './Components/EditProfile/EditProfile'
 
 
 
@@ -21,6 +22,7 @@ export default (
         <Route exact path="/register" component={Register} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/profile/:user_id" component={OwnProfile} />
+        <Route exact path="/profile/edit/:user_id" component={EditProfile} />
         <Route exact path="/" component={Login} />
         <Route exact path="/otherprofile" component={OtherProfile} />
     </Switch>
