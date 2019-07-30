@@ -7,6 +7,7 @@ import Home from './Components/Home/Home'
 import OwnProfile from './Components/OwnProfile/OwnProfile'
 import OtherProfile from './Components/OtherProfile/OtherProfile'
 import Login from './Components/Login/Login'
+import CreateEvent from './Components/CreateEvent/CreateEvent'
 
 
 
@@ -14,6 +15,7 @@ import Login from './Components/Login/Login'
 
 export default (
     <Switch>
+        <Route path="/events/createEvent" component={CreateEvent} />
         <Route exact path="/events" component={Events} />
         <Route exact path="/events/:event_id" component={Event} />
         <Route exact path="/register" component={Register} />

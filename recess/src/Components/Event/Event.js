@@ -16,7 +16,6 @@ function Event(props) {
   let socket = io(`/events/${props.match.params.event_id}`)
 
   useEffect(   () => {
-    // props.getSubscribedEvents()
     props.checkUser()
     props.checkUserSubscribedEvents(props.match.params.event_id)
     props.getEvent(props.match.params.event_id)
@@ -31,6 +30,8 @@ function Event(props) {
 
   let handleSubscribeToEvent = () => {
     props.subscribeToEvent(props.match.params.event_id)
+    props.history.push('/home')
+
   }
 
   let handleUnsubscribeToEvent = () => {
@@ -43,28 +44,30 @@ function Event(props) {
     props.history.push('/home')
   }
 
-  let handleSubmit = e => {
-    const body = e.target.value
-    if (e.keyCode === 13 && body) {
-      const message = {
-        body,
-        from: props.user.data.username
-      }
-      setMessageBody({
-        messages: [message, ...messageBody.messages]  
-      })
-      props.createMessage({message_content: message.body}, props.match.params.event_id)
-      // socket.emit('message', body)
-      e.target.value = ''
-    }
-  }
+  // let handleSubmit = e => {
+  //   const body = e.target.value
+  //   if (e.keyCode === 13 && body) {
+  //     const message = {
+  //       body,
+  //       from: props.user.data.username
+  //     }
+  //     // setMessageBody({
+  //     //   messages: [message, ...messageBody.messages]  
+  //     // })
+  //     props.createMessage({message_content: message.body}, props.match.params.event_id)
+  //     // socket.emit('message', body)
+  //     e.target.value = ''
+  //   }
+  // }
 
   console.log(props)
 
+  
   let {event} = props
+
   
   return (
-    <div className='message-box'>
+    <div className='message-box'> 
       {props.user ?
       <div>
         {props.event &&
@@ -80,7 +83,7 @@ function Event(props) {
               <p><b>Time</b>: {new Date(event.event_date).toLocaleTimeString()}</p>
               <p> <b>Description</b>: {event.event_description}</p>
               <p><b>Location</b>: {`${event.event_city}, ${event.event_state}`}</p>
-              <button onClick={() => props.history.push('/')}>Back</button>
+              <button onClick={() => window.history.back()}>Back</button>
               {new Date(event.event_date) > new Date() &&
                 <div>
                   {props.subscribedEvent ?

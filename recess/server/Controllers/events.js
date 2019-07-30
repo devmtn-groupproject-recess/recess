@@ -60,9 +60,9 @@ module.exports = {
             const {user_id} = req.session.user
             const {event_id} = req.params 
     
-            await db.subscribe_user_to_event({user_id, event_id})
+            let events = await db.subscribe_user_to_event({user_id, event_id})
     
-            res.status(200).send("Success")
+            res.status(200).send(events)
         }catch(error) {
             console.log('Error in events Ctrl (subscribeToEvent)', error)
             res.status(409).send(error)
@@ -93,20 +93,35 @@ module.exports = {
                 event_name, 
                 event_type,
                 event_date,
+                event_time,
                 event_description,
                 event_location_lat,
-                event_location_long
+                event_location_long,
+                event_city,
+                event_state,
             } = req.body
-            db.add_event({
+            console.log(req.body)
+            const dateTime = `${event_date} ${event_time}:00`
+            const eventList = await db.add_event({
                 event_creator_id,
                 event_name,
                 event_type,
-                event_date,
+                event_date: dateTime,
                 event_description,
                 event_location_lat,
-                event_location_long
+                event_location_long,
+                event_city,
+                event_state
             })
-            res.status(200).send("Event Created")
+
+            console.log("Events:" ,eventList)
+
+            const event_id =(eventList[eventList.length -1].event_id)
+            console.log(event_id)
+
+            const newEventList = await db.subscribe_user_to_event({event_id, user_id: event_creator_id})
+
+            res.status(200).send(newEventList)
         }catch(error) {
             console.log('Error in events Ctrl (addEvent)', error)
             res.status(409).send(error)
