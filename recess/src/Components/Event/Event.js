@@ -124,7 +124,7 @@ function Event(props) {
                 }
                 </div>  */}
                 
-                <input type='text' placeholder='Enter a message...' onKeyUp={ (e) => handleSubmit(e)}/>
+                {/* <input type='text' placeholder='Enter a message...' onKeyUp={ (e) => handleSubmit(e)}/> */}
               </div>
             </div>
           </div>
