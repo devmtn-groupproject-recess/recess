@@ -21,7 +21,7 @@ function Navbar(props) {
     return(
       <div className="navbar">
         <i className="logo">RECESS</i>
-        {props.user &&
+        {props.user && props.user.data && 
         <div>
             <nav >
                 <div>

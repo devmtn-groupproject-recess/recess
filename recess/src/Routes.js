@@ -20,7 +20,7 @@ export default (
         <Route exact path="/events/:event_id" component={Event} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/home" component={Home} />
-        <Route exact path="/profile" component={OwnProfile} />
+        <Route exact path="/profile/:user_id" component={OwnProfile} />
         <Route exact path="/" component={Login} />
         <Route exact path="/otherprofile" component={OtherProfile} />
     </Switch>

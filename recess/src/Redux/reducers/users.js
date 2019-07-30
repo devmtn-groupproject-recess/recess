@@ -64,7 +64,7 @@ export default function (state = initialState, action) {
         case GET_USER_FULFILLED:
             return{
                 ...state,
-                data:payload.data,
+                selected:payload.data,
                 loading:false
             }
         case GET_USER_REJECTED:
@@ -266,7 +266,7 @@ export function editUser(userInfo) {
 export function getUser(user_id) {
     return {
         type: GET_USER,
-        payload: Axios.post(`user/getUser/${user_id}`)
+        payload: Axios.get(`user/getUser/${user_id}`)
     }
 }
 
