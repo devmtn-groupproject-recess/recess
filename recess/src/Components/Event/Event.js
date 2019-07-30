@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './Event.css'
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 import {getEvent, checkUserSubscribedEvents, subscribeToEvent, unsubscribeToEvent, deleteEvent} from '../../Redux/reducers/events'
 import {checkUser} from '../../Redux/reducers/users'
 import {connect} from 'react-redux'
@@ -11,9 +11,10 @@ function Event(props) {
 
   let [messageBody, setMessageBody] = useState({
     messages: [],
+    message_content:''
   })
 
-  let socket = io(`/events/${props.match.params.event_id}`)
+  // let socket = io(`/events/${props.match.params.event_id}`)
 
   useEffect(   () => {
     props.checkUser()
@@ -44,6 +45,15 @@ function Event(props) {
     props.history.push('/home')
   }
 
+  let handleChange = (event) => {
+    const {name, value} = event.target
+    setMessageBody({
+      ...messageBody,
+      [name]: value 
+    })
+    console.log(messageBody)
+  }
+
   // let handleSubmit = e => {
   //   const body = e.target.value
   //   if (e.keyCode === 13 && body) {
@@ -59,6 +69,10 @@ function Event(props) {
   //     e.target.value = ''
   //   }
   // }
+
+  let handleSubmit = () => {
+      props.createMessage({message_content:messageBody.message_content}, props.match.params.event_id)
+  }
 
   console.log(props)
 
@@ -110,7 +124,7 @@ function Event(props) {
                 { props.messages && 
                 <div>
                   {props.messages.map((oldMessage, index) => {
-                    console.log(111111, oldMessage)
+                    // console.log(111111, oldMessage)
                     return <ul key={index}><b>{oldMessage.username}: </b>{oldMessage.message_content}</ul>
                   })}
                 </div>
@@ -124,7 +138,8 @@ function Event(props) {
                 }
                 </div>  */}
                 
-                {/* <input type='text' placeholder='Enter a message...' onKeyUp={ (e) => handleSubmit(e)}/> */}
+                <input type='text' name='message_content'placeholder='Enter a message...' onChange={ (e) => handleChange(e)}/>
+                <button onClick={ () => handleSubmit()}>Add Message</button>
               </div>
             </div>
           </div>
