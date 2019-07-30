@@ -15,13 +15,14 @@ module.exports = {
     },
     getEvent: async (req, res) => {
         try {
-                const db = req.app.get('db')
-                const {event_id} = req.params
-                const eventsList = await db.get_events(event_id)
-        
                 if(!req.session.user) {
                     res.status(404).send("No user is logged in!")
                 }
+
+                const db = req.app.get('db')
+                const {event_id} = req.params
+                
+                const eventsList = await db.get_event(event_id)
         
                 res.status(200).send(eventsList[0])
             }
@@ -165,6 +166,24 @@ module.exports = {
             next()
         }catch(error){
             console.log("There was an error in the checkSubscribedEvents block (eventsCtrl)", error)
+            res.status(409).send(error)
+        }
+    },
+    checkUserSubscribedEvents: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const {user_id} = req.session.user
+            const {event_id} = req.params
+            const response = await db.check_event({user_id, event_id})
+            if(response[0]){
+                res.status(200).send(true)
+            }
+            else{
+                res.status(200).send(false)
+            }
+            
+        }catch(error){
+            console.log("There was an error in the checkUserSubscribedEvents block (eventsCtrl)", error)
             res.status(409).send(error)
         }
     }

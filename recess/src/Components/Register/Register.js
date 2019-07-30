@@ -160,6 +160,7 @@ import './Register.css'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {checkUser, register} from '../../Redux/reducers/users'
+import AmazonS3 from '../S3Bucket/S3Bucket'
 
 
 
@@ -212,85 +213,111 @@ function Register(props) {
       user_img: ''
     })
     props.history.push('/home')
-}
-
-
+  }
+  
+  let setUserPic = (url) => {
+    setRegisterInfo({
+      ...registerInfo,
+      user_img: url
+    })
+    console.log(registerInfo.user_img)
+  }
   
   return (
-    <div className='message-box'>
+    <div className="bg">
       {props.users ?
       
       <Redirect to='/home' />
 
       :
       
-      <div>
-        <h1>Welcome Back! Please Log in!</h1>
-        <input 
+      <div className='registerBox'>
+        <h1 className="header">Welcome! Please Create An Account!</h1>
+        {registerInfo.user_img ?
+        
+        <img src={registerInfo.user_img} />
+
+        :
+
+        <img src='https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg' />
+
+        }
+        <AmazonS3 setUserPic={setUserPic} />
+        <input className="input"
           placeholder='First Name'
           type='text'
           name='user_first_name'
           onChange={(event) => handleChange(event)}
-        />  
-        <input 
+        />
+        <br/> 
+        <input className="input"
           placeholder='Last Name'
           type='text'
           name='user_last_name'
           onChange={(event) => handleChange(event)}
-        />  
-        <input 
+        /> 
+        <br/>  
+        <input className="input"
           placeholder='Address'
           type='text'
           name='user_address'
           onChange={(event) => handleChange(event)}
-        />  
-        <input 
+        />
+        <br/>   
+        <input className="input"
           placeholder='City'
           type='text'
           name='user_city'
           onChange={(event) => handleChange(event)}
-        />  
-        <input 
+        /> 
+        <br/>  
+        <input className="input"
           placeholder='State'
           type='text'
           name='user_state'
           onChange={(event) => handleChange(event)}
-        />  
-        <input 
+        /> 
+        <br/>  
+        <input className="input"
           placeholder='Zip Code'
           type='number'
           name='user_zip'
           onChange={(event) => handleChange(event)}
-        />  
-        <input 
+        />
+        <br/>   
+        <input className="input"
           placeholder='Phone Number'
           type='text'
           name='user_phone'
           onChange={(event) => handleChange(event)}
-        />  
-        <input 
+        /> 
+        <br/>  
+        {/* <input 
           placeholder='Image Url'
           type='text'
           name='user_img'
           onChange={(event) => handleChange(event)}
-        />  
-        <input 
+        />   */}
+        <input className="input"
           placeholder='Username'
           type='text'
           name='username'
           onChange={(event) => handleChange(event)}
-        />  
-        <input 
+        /> 
+        <br/>  
+        <input className="input"
           placeholder='Password'
           type='text'
           name='password'
           onChange={(event) => handleChange(event)}
         />  
-        
-        <button 
+        <br/> 
+        <button className="btn"
          onClick={ () => handleRegister()}>Create</button>
       </div>
       }
+      <br/> 
+      <div className="login" onClick={() => props.history.push('/')}>Already Have An Account? Log In Here.</div>
     </div>
 
   )

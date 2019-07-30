@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import './Login.css'
 
 import {login, checkUser} from '../../Redux/reducers/users'
-
-
 
 function Login(props) {
 
@@ -44,32 +43,34 @@ function Login(props) {
   
   
   return (
-    <div className='message-box'>
+    <div className='bg'>
       {props.users ?
       
       <Redirect to='/home' />
 
       :
       
-      <div>
-        <h1>Welcome Back! Please Log in!</h1>
-        <input 
+      <div className="loginBox">
+        <h1><i>Welcome! Please Log in!</i></h1>
+        <input className="username"
           placeholder='Username'
           type='text'
           name='username'
           onChange={(event) => handleChange(event)}
         />  
-        <input 
+        <input className="password"
           placeholder='Password'
           type='text'
           name='password'
           onChange={(event) => handleChange(event)}
-          />  
-        <button 
+          /> 
+          <br/> 
+        <button className="btn"
          onClick={ () => loginUser()}>Login</button>
+        
+         <h5 className="regText">Need an account? <Link to="/register" className="register" >Register Here.</Link></h5>
       </div>
       }
-      <p onClick={ () => props.history.push('/register')}>Need an account?</p>
     </div>
 
   )

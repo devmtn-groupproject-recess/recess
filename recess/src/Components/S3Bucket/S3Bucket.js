@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Axios from 'axios'
 import {connect} from 'react-redux'
 
-import './s3Bucket.css'
+import './S3Bucket.css'
 
 class S3Bucket extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class S3Bucket extends Component {
         this.sendPhoto = this.sendPhoto.bind(this)
     }
 
-    handlePhoto(event) {
+    handlePhoto = (event) => {
         const reader = new FileReader()
 
         const file = event.target.files[0]
@@ -35,7 +35,7 @@ class S3Bucket extends Component {
         reader.readAsDataURL(file)
     }
 
-    sendPhoto() {
+    sendPhoto = () => {
         return Axios.post('/api/s3', this.state).then(res => {
             //take this res.data.Location and set it to the database as the image
             console.log(909090, this.props)

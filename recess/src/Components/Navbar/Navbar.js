@@ -1,27 +1,39 @@
 import React, { useState } from 'react'
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './Navbar.css'
+import {logout} from '../../Redux/reducers/users'
+import {connect} from 'react-redux'
 
-function Navbar() {
+function Navbar(props) {
+
+  let handleLogout = () => {
+    console.log("hit")
+    props.logout()
+  }
     return(
       <div>
           <nav className="navbar">
               <div>
-                <a className="logo">RECESS</a>
+                <i className="logo">RECESS</i>
                 <label for="toggle" class="label">&#9776;</label>
                 <input type="checkbox" id="toggle"/>
                 <div class="menu">
                   <Link to="/home" className="words">Home</Link>
                   <Link to="/events" className="words">Events</Link>
                   <Link to="/profile" className="words">Profile</Link>
-                  <Link to="/" className="words">Logout</Link>
+                  <p className="words" onClick={handleLogout}>Logout</p>
                 </div>
               </div>
           </nav>
+          <br/>
+          <br/>
+          <br/>
       </div>  
     )
   }
 
   //Unsure where to put the link to the other profile at so we can discuss that and add that to the router.
-
-  export default Navbar;
+  let mapDispatchToProps = {
+    logout
+  }
+  export default connect(null, mapDispatchToProps)(Navbar);
