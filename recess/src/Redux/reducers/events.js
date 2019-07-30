@@ -194,7 +194,7 @@ export default function (state = initialState, action) {
 export function getEvents() {
     return {
         type: GET_EVENTS,
-        payload: Axios.post(`/api/events`)
+        payload: Axios.get(`/api/events`)
     }
 }
 

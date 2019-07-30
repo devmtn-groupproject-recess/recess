@@ -12,7 +12,7 @@ function Navbar() {
                 <input type="checkbox" id="toggle"/>
                 <div class="menu">
                   <Link to="/home" className="words">Home</Link>
-                  <Link to="/event" className="words">Events</Link>
+                  <Link to="/events" className="words">Events</Link>
                   <Link to="/profile" className="words">Profile</Link>
                   <Link to="/" className="words">Logout</Link>
                 </div>

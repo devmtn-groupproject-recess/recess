@@ -3,7 +3,6 @@ module.exports = {
     try {
             const db = req.app.get('db')
             const eventsList = await db.get_events()
-    
             if(!req.session.user) {
                 res.status(404).send("No user is logged in!")
             }
