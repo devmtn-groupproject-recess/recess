@@ -23,6 +23,14 @@ massive(CONNECTION_STRING).then( db => {
     const io = socket(app.listen(SERVER_PORT, () => {
         console.log(`Server is listening on port: ${SERVER_PORT}`)
     }))
+
+    // io.on('connection', socket => {
+    //     socket.emit('chat-message', 'hello, world')
+
+        
+    // })
+
+    
 })
 
 AWS.config.update({

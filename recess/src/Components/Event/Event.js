@@ -1,18 +1,32 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import './Event.css'
 import io from 'socket.io-client'
 import {getEvent, checkUserSubscribedEvents, subscribeToEvent, unsubscribeToEvent, deleteEvent} from '../../Redux/reducers/events'
 import {checkUser} from '../../Redux/reducers/users'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import {createMessage, getMessages} from '../../Redux/reducers/messages'
 
 function Event(props) {
+
+  let [messageBody, setMessageBody] = useState({
+    messages: [],
+  })
+
+  let socket = io(`/events/${props.match.params.event_id}`)
 
   useEffect(   () => {
     // props.getSubscribedEvents()
     props.checkUser()
     props.checkUserSubscribedEvents(props.match.params.event_id)
     props.getEvent(props.match.params.event_id)
+    props.getMessages(props.match.params.event_id)
+    
+    // socket.on('chat-message', message => {
+    //   setMessageBody({
+    //     messages: [message, ...messageBody.messages]  
+    //   })
+    // })
   }, [])
 
   let handleSubscribeToEvent = () => {
@@ -27,6 +41,22 @@ function Event(props) {
   let handleDelete = () => {
     props.deleteEvent(props.match.params.event_id)
     props.history.push('/home')
+  }
+
+  let handleSubmit = e => {
+    const body = e.target.value
+    if (e.keyCode === 13 && body) {
+      const message = {
+        body,
+        from: props.user.data.username
+      }
+      setMessageBody({
+        messages: [message, ...messageBody.messages]  
+      })
+      props.createMessage({message_content: message.body}, props.match.params.event_id)
+      // socket.emit('message', body)
+      e.target.value = ''
+    }
   }
 
   console.log(props)
@@ -72,7 +102,28 @@ function Event(props) {
 
               }
             </div>
-            <div className="chatBox"><h1>Chat Box Goes Here</h1></div>
+            <div className="chatBox"><h1>The Huddle</h1>
+              <div>
+                { props.messages && 
+                <div>
+                  {props.messages.map((oldMessage, index) => {
+                    console.log(111111, oldMessage)
+                    return <ul key={index}><b>{oldMessage.username}: </b>{oldMessage.message_content}</ul>
+                  })}
+                </div>
+
+                }
+                {/* <div>
+                {
+                  messageBody.messages.map((message, index) => {
+                    return <ul key={index}><b>{message.from}: </b>{message.body}</ul>
+                  })
+                }
+                </div>  */}
+                
+                <input type='text' placeholder='Enter a message...' onKeyUp={ (e) => handleSubmit(e)}/>
+              </div>
+            </div>
           </div>
         }
 
@@ -93,7 +144,8 @@ let mapStateToProps = state => {
   return {
     event: state.events.selected,
     user: state.users.data,
-    subscribedEvent: state.events.data
+    subscribedEvent: state.events.data,
+    messages: state.messages.data
   }
 }
 
@@ -103,7 +155,9 @@ let mapDispatchToProps = {
   checkUserSubscribedEvents,
   subscribeToEvent,
   unsubscribeToEvent,
-  deleteEvent
+  deleteEvent,
+  createMessage,
+  getMessages
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);

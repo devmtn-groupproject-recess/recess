@@ -106,7 +106,7 @@ export default function (state = initialState, action) {
 export function getMessages(event_id) {
     return {
         type: GET_MESSAGES_FOR_EVENT,
-        payload: Axios.post(`/api/messages/${event_id}`)
+        payload: Axios.get(`/api/messages/${event_id}`)
     }
 }
 
