@@ -16,10 +16,10 @@ function Home(props) {
   
 
   return (
-    <div>
+    <div className="scoreboard">
       { props.user ?
-        <div>
-          <h1>Events I'm Going To:</h1>
+        <div className="eigt1">
+          <h1 className="eigtTitle">Events I'm Going To:</h1>
           
           {events && events!== true &&
           events.filter( se => {
@@ -34,15 +34,15 @@ function Home(props) {
             let showDate = timeDate.toLocaleDateString()
 
               return(
-                <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                  <h3>{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
+                <div className="padme" key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
+                  <h3 className="eventDetails">{`${singleEvent.event_name}`}</h3>
                   <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
                   <p>{`${showDate} ${showTime}`}</p>
                 </div>
               )
             })
           }
-          <h1>Events I've Gone To:</h1>
+          <h1 className="eigtTitle">Events I've Gone To:</h1>
           {events && events!== true &&
           events.filter( se => {
             return new Date(se.event_date) < new Date()
@@ -57,7 +57,7 @@ function Home(props) {
 
               return(
                 <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                  <h3>{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
+                  <h3 className="eventDetails">{`${singleEvent.event_name}`}</h3>
                   <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
                   <p>{`${showDate} ${showTime}`}</p>
                 </div>

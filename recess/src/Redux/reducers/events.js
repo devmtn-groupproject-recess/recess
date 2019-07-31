@@ -3,7 +3,7 @@ import Axios from 'axios'
 let initialState = {
     data: null,
     selected: null,
-    loading: null
+    loading: null,
 }
 
 const GET_EVENTS = 'GET_EVENTS'
@@ -17,6 +17,11 @@ const GET_EVENT = 'GET_EVENT'
 const GET_EVENT_PENDING = 'GET_EVENT_PENDING'
 const GET_EVENT_FULFILLED = 'GET_EVENT_FULFILLED'
 const GET_EVENT_REJECTED = 'GET_EVENT_REJECTED'
+
+const GET_USER_CREATED_EVENTS = 'GET_USER_CREATED_EVENTS'
+const GET_USER_CREATED_EVENTS_PENDING = 'GET_USER_CREATED_EVENTS_PENDING'
+const GET_USER_CREATED_EVENTS_FULFILLED = 'GET_USER_CREATED_EVENTS_FULFILLED'
+const GET_USER_CREATED_EVENTS_REJECTED = 'GET_USER_CREATED_EVENTS_REJECTED'
 
 const CHECK_SUBSCRIBED_EVENT = 'CHECK_SUBSCRIBED_EVENT'
 const CHECK_SUBSCRIBED_EVENT_PENDING = 'CHECK_SUBSCRIBED_EVENT_PENDING'
@@ -211,6 +216,23 @@ export default function (state = initialState, action) {
                 loading: false
             }
 
+        case GET_USER_CREATED_EVENTS_PENDING:
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_USER_CREATED_EVENTS_FULFILLED:
+            return{
+                ...state,
+                data:payload.data,
+                loading:false
+            }
+        case GET_USER_CREATED_EVENTS_REJECTED:
+            return {
+                ...state,
+                loading: false
+            }
+
         default: 
             return state
     }
@@ -228,6 +250,14 @@ export function getEvent(event_id) {
     return {
         type: GET_EVENT,
         payload: Axios.get(`/api/events/${event_id}`)
+    }
+}
+
+export function getUserCreatedEvent() {
+    console.log("hit")
+    return {
+        type: GET_USER_CREATED_EVENTS,
+        payload: Axios.get(`/api/user_created_events`)
     }
 }
 

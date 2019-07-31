@@ -9,11 +9,11 @@ import {createMessage, getMessages} from '../../Redux/reducers/messages'
 import Map from '../Maps/Map'
 
 function Event(props) {
-  console.log('render', 55555, props)
+
   let [messageBody, setMessageBody] = useState({
     messages: [],
     message_content:'',
-    waste:0
+    // waste:0
   })
   let [location, setLocation] = useState()
   
@@ -29,16 +29,16 @@ function Event(props) {
     props.checkUser()
     props.checkUserSubscribedEvents(props.match.params.event_id)
     props.getMessages(props.match.params.event_id)
-    props.getEvent(props.match.params.event_id)
     
-    if(props.event){
-    setLocation({lat: +props.event.event_location_lat, lng: +props.event.event_location_long});console.log('LOCATION', location)}
-
-    if(!location){setMessageBody({...messageBody, waste: messageBody.waste+=1}); console.log(5555, messageBody)}
     
-    console.log(messageBody.waste) 
-    console.log(location)
-  }, [messageBody.waste])
+    
+    async function fetch(){
+      const res = await props.getEvent(props.match.params.event_id)
+      .then(res => setLocation({lat: +res.value.data.event_location_lat, lng: +res.value.data.event_location_long}))
+    }
+    fetch()
+    
+  }, [])
 
   let handleSubscribeToEvent = () => {
     props.subscribeToEvent(props.match.params.event_id)
@@ -92,7 +92,7 @@ function Event(props) {
         
       const marker = new window.google.maps.Marker({
         map,
-        position: messageBody.location,
+        position: location,
         label: `${index + 1}`,
         title: link.title,
         
@@ -105,11 +105,11 @@ function Event(props) {
   let linksfromthedepths = [{
       title: 'For the Glory',
       url: 'hereisURL',
-      coords: messageBody.location
+      coords: location
   }]
   let mapProps = {
     options: {
-      center: messageBody.location,
+      center: location,
       zoom: 15,
     },
     onMount: addMarkers(linksfromthedepths)
@@ -123,7 +123,7 @@ function Event(props) {
             
             <div className="googleMap">
               <h1>Map Goes Here</h1>
-              {/* { messageBody.location? <Map {...mapProps}></Map>  :null  } */}
+              { location ? <Map {...mapProps}></Map>  :null  }
             </div>
             <div className="eventInfo">
               
@@ -194,7 +194,6 @@ function Event(props) {
 }
 
 let mapStateToProps = state => {
-  console.log(state)
   return {
     event: state.events.selected,
     user: state.users.data,
