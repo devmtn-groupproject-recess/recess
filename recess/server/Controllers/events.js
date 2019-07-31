@@ -162,6 +162,7 @@ module.exports = {
                 event_state,
                 event_city
             } = req.body
+            console.log(req.body, event_id, event_creator_id)
             const updatedEvent = await db.edit_event({
                 event_creator_id,
                 event_name,

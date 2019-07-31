@@ -24,8 +24,8 @@ export default (
         <Route exact path="/register" component={Register} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/profile/:user_id" component={OwnProfile} />
-        <Route exact path="/profile/edit/:user_id" component={EditProfile} />
         <Route exact path="/" component={Login} />
-        <Route exact path="/otherprofile" component={OtherProfile} />
+        <Route exact path="/otherprofile/:user_id" component={OtherProfile} />
+        <Route exact path="/profile/edit/:user_id" component={EditProfile} />
     </Switch>
 )

@@ -11,7 +11,7 @@ function OwnProfile(props) {
     props.getUser(props.match.params.user_id)
     props.getUserCreatedEvent()
   }, [])
-  console.log(props.user)
+  console.log(1234556, props)
     return (
       
       <div>
