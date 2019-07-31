@@ -82,12 +82,12 @@ function EditProfile(props) {
   }
   
   return (
-    <div>
+    <div className="gradient">
       {props.users ?
       
       
       
-      <div >
+      <div className="editForm">
         {editedInfo.user_img ?
         
         <img src={editedInfo.user_img} />

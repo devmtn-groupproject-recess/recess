@@ -1,0 +1,12 @@
+.editForm {
+    text-align: center;
+    border: 5px solid indigo;
+    height: 100%;
+    width: 100%;
+}
+
+.gradient {
+    background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
+    height: 100%;
+    width: 100%;
+}

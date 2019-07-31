@@ -20,14 +20,14 @@ function OwnProfile(props) {
           {props.selected && 
             <div className="playerCard">
               <img className="profilePic" src={props.selected.user_img}/>
-              <h1>{`${props.selected.user_first_name} ${props.selected.user_last_name}`}</h1>
-              <h2>{props.selected.username}</h2>
-              <h3>{`${props.selected.user_city}, ${props.selected.user_state}`}</h3>
-              <h3>Sports</h3>
-              <button onClick={() => props.history.push(`/profile/edit/${props.match.params.user_id}`)}>Edit</button>
+              <h1 className="letteringSport">{`${props.selected.user_first_name} ${props.selected.user_last_name}`}</h1>
+              <h2 className="letteringText">{props.selected.username}</h2>
+              <h3 className="letteringText">{`${props.selected.user_city}, ${props.selected.user_state}`}</h3>
+              <h3 className="letteringText">Sports</h3>
+              <button className="btn" onClick={() => props.history.push(`/profile/edit/${props.match.params.user_id}`)}>Edit</button>
               {props.events && 
                 <div>
-                  <h1>Events I Created:</h1>
+                  <h1 className="letteringSport">Events I Created:</h1>
                   {props.events.map( (singleEvent, index) => {
                     let timeDate = new Date(singleEvent.event_date)
                     let showTime = timeDate.toLocaleTimeString()
@@ -35,9 +35,9 @@ function OwnProfile(props) {
                   
                       return(
                         <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                          <h3>{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
-                          <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
-                          <p>{`${showDate} ${showTime}`}</p>
+                          <h3 className="letteringText">{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
+                          <p className="letteringText">{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
+                          <p className="letteringText">{`${showDate} ${showTime}`}</p>
                         </div>
                       )
                     })
