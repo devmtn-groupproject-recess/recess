@@ -1,0 +1,42 @@
+.bracketBoard {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://recess-group.s3-us-west-2.amazonaws.com/eventsbg.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.button {
+    height: 60px;
+    width: 90px;
+    border-radius: 12px;
+    background-color: indigo;
+    margin: 10px;
+    font-family: 'Black Ops One', cursive;
+    color: gold;
+    border: 5px solid indigo;
+}
+
+.planner {
+    border: 5px solid indigo;
+    margin: 50px;
+    background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
+    text-align: center;
+}
+
+.title {
+    font-family: 'Black Ops One', cursive;
+    margin-top: 50px;
+    font-style: italic;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: gold;
+}
+
+.eventDeets{   
+    font-family: 'Oswald', sans-serif;
+    font-style: italic;
+}
