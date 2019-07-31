@@ -1,7 +1,7 @@
 .background {
     background-image: url('https://recess-group.s3-us-west-2.amazonaws.com/lockers.jpg');
     /* height: 100vh; */
-    width: 100vw;
+    width: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -39,6 +39,32 @@
     border: 5px solid indigo;
 }
 
+.letteringSport {
+    font-family: 'Black Ops One', cursive;
+    color: gold;
+}
+
+.letteringText {
+    font-family: 'Oswald', sans-serif;
+    font-style: italic;
+}
+
 @media screen and (max-width: 500px) {
-   
+    .playerCard {
+        border: 5px solid indigo;
+        text-align: center;
+        /* height: 600px; */
+        width: 90%;
+        margin: 5% 0;
+        padding: 3%;
+        background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
+    }
+
+    .profilePic {
+        height: 165px;
+        width: 165px;
+        border-radius: 50%;
+        border: 5px inset black;
+        margin: 50px
+    }
 }

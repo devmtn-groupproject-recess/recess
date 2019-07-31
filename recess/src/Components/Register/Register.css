@@ -1,5 +1,7 @@
 .bg {
     display: flex;
+    height: 100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
     background-image: url('https://recess-group.s3-us-west-2.amazonaws.com/7602065_sports-and-recreation-la-palmas-central-park-scott-feinblatt.jpg');
@@ -13,8 +15,9 @@
 .registerBox {
     border: 5px solid indigo;
     text-align: center;
-    margin:0;
+    margin-top: 150px;
     padding: 0;
+    background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
 }
 
 .header {
@@ -40,5 +43,11 @@
 }
 
 @media screen and (max-width: 500px) {
-   
+    .registerBox {
+        border: 5px solid indigo;
+        background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
+        text-align: center;
+        margin-top: 250px;
+        padding: 0;
+    } 
 }
