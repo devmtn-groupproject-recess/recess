@@ -10,8 +10,6 @@ import AmazonS3 from '../S3Bucket/S3Bucket'
 function EditProfile(props) {
 
   let [editedInfo, setEditedInfo] = useState({
-    username: '',
-    password: '',
     user_first_name: '',
     user_last_name: '',
     user_address: '',
@@ -30,9 +28,17 @@ function EditProfile(props) {
     }
     if(props.selected !== null){
         setEditedInfo({
-            username: props.selected.username
+          user_first_name: props.selected.user_first_name,
+          user_last_name: props.selected.user_last_name,
+            user_address: props.selected.user_address,
+            user_city: props.selected.user_city,
+            user_state: props.selected.user_state,
+            user_zip: props.selected.user_zip,
+            user_phone: props.selected.user_phone,
+            user_img: props.selected.user_img,
         })
     }
+    console.log(editedInfo)
   }, [props.selected]) 
 
   let handleChange = (event) => {
@@ -72,24 +78,20 @@ function EditProfile(props) {
       ...editedInfo,
       user_img: url
     })
-    console.log(editedInfo.user_img)
+    console.log(editedInfo)
   }
   
   return (
     <div>
       {props.users ?
       
-    //   <Redirect to='/home' />
-    <div>ladeda</div>
-
-      :
       
-      <div className='registerBox'>
-        <h1 className="header">Welcome! Please Create An Account!</h1>
+      
+      <div >
         {editedInfo.user_img ?
         
         <img src={editedInfo.user_img} />
-
+        
         :
 
         <img src='https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg' />
@@ -98,6 +100,7 @@ function EditProfile(props) {
         <AmazonS3 setUserPic={setUserPic} />
         <input className="input"
           placeholder='First Name'
+          value={editedInfo.user_first_name}
           type='text'
           name='user_first_name'
           onChange={(event) => handleChange(event)}
@@ -105,33 +108,38 @@ function EditProfile(props) {
         <br/> 
         <input className="input"
           placeholder='Last Name'
+          value={editedInfo.user_last_name}
           type='text'
           name='user_last_name'
           onChange={(event) => handleChange(event)}
-        /> 
+          /> 
         <br/>  
         <input className="input"
+          value={editedInfo.user_address}
           placeholder='Address'
           type='text'
           name='user_address'
           onChange={(event) => handleChange(event)}
-        />
+          />
         <br/>   
         <input className="input"
+          value={editedInfo.user_city}
           placeholder='City'
           type='text'
           name='user_city'
           onChange={(event) => handleChange(event)}
-        /> 
+          /> 
         <br/>  
         <input className="input"
+          value={editedInfo.user_state}
           placeholder='State'
           type='text'
           name='user_state'
           onChange={(event) => handleChange(event)}
-        /> 
+          /> 
         <br/>  
         <input className="input"
+          value={editedInfo.user_zip}
           placeholder='Zip Code'
           type='number'
           name='user_zip'
@@ -139,23 +147,29 @@ function EditProfile(props) {
         />
         <br/>   
         <input className="input"
+          value={editedInfo.user_phone}
           placeholder='Phone Number'
           type='text'
           name='user_phone'
           onChange={(event) => handleChange(event)}
-        /> 
+          /> 
         <br/> 
         <button className="btn"
          onClick={ () => handleChanges()}>Save</button>
       </div>
+
+      :
+      
+      //   <Redirect to='/home' />
+      <div>ladeda</div>
       }
-    </div>
+      </div>
 
-  )
+      )
   
-}
+    }
 
-let mapDispatchToProps = {
+    let mapDispatchToProps = {
   getUser,
   checkUser,
   editUser
