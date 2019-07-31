@@ -31,6 +31,26 @@ module.exports = {
             res.status(409).send(error)
         }
     },
+    getUserCreatedEvents: async (req, res) => {
+        try {
+                if(!req.session.user) {
+                    res.status(404).send("No user is logged in!")
+                }
+
+                const db = req.app.get('db')
+                const {user_id} = req.session.user
+                
+                const userCreatedEventsList = await db.get_user_created_events(user_id)
+
+                console.log(898989, userCreatedEventsList)
+        
+                res.status(200).send(userCreatedEventsList)
+            }
+        catch(error) {
+            console.log('Error in events Ctrl (getUserCreatedEvents)', error)
+            res.status(409).send(error)
+        }
+    },
     getSubscribedEvents: async (req, res) => {
         try{
             const db = req.app.get('db')
