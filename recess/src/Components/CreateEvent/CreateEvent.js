@@ -10,7 +10,6 @@ import Map from '../Maps/Map'
 const Key = process.env.REACT_APP_GOOGLE_API_KEY
 
 function CreateEvent(props) {
-    console.log('render')
     
     let [eventInfo, setEventInfo] = useState({
         event_name: '',
@@ -108,7 +107,6 @@ function CreateEvent(props) {
         onMount: addMarkers(linksfromthedepths)
       }
       const MemoMap = useCallback(<Map{...mapProps} />, [eventInfo.location])
-      console.log(`User: ${props.user} Location: ${eventInfo.location}`)
     return(
         <div>
             {props.user? 
@@ -125,7 +123,8 @@ function CreateEvent(props) {
                     />
                     <br/> 
                     <div class="dropdown">
-                        <input 
+                        <input
+                        readOnly 
                         class="input"
                         placeholder='Event Type'
                         name='event_type'

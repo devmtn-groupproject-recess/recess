@@ -1,3 +1,5 @@
+//clean up the map so that the flag doens't reroute and so that the number is gone, maybe info window, etc.
+
 import React, {useEffect, useState} from 'react'
 import './Event.css'
 // import io from 'socket.io-client'
