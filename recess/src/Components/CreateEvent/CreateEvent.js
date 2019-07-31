@@ -108,10 +108,12 @@ function CreateEvent(props) {
         onMount: addMarkers(linksfromthedepths, eventInfo)
       }
       const MemoMap = useCallback(<Map{...mapProps} />, [eventInfo.location])
-
+      console.log(`User: ${props.user} Location: ${eventInfo.location}`)
     return(
         <div>
-            {props.user && eventInfo.location?
+            {props.user? 
+            <div>
+              { eventInfo.location &&
                 <div>
                     {/* <Map {...mapProps}  /> */}
                     {MemoMap}
@@ -137,7 +139,7 @@ function CreateEvent(props) {
                     </div>
                     
                     <br/> 
-
+  
                     <input className="input"
                     placeholder='YYYY-MM-DD'
                     type='text'
@@ -145,7 +147,7 @@ function CreateEvent(props) {
                     onChange={(event) => handleChange(event)}
                     /> 
                     <br/> 
-
+  
                     <input className="input"
                     placeholder='HH:MM'
                     type='text'
@@ -153,7 +155,7 @@ function CreateEvent(props) {
                     onChange={(event) => handleChange(event)}
                     /> 
                     <br/> 
-
+  
                     <input className="input"
                     placeholder='Description'
                     type='text'
@@ -161,7 +163,7 @@ function CreateEvent(props) {
                     onChange={(event) => handleChange(event)}
                     /> 
                     <br/> 
-
+  
                     {/* <div class="dropdown">
                         <input 
                         class="input"
@@ -208,8 +210,13 @@ function CreateEvent(props) {
                     onClick={ () => handleCreate()}>Create</button>
                     <button className='btn'
                     onClick={ () => window.history.back()}>Back</button>
-
+  
                 </div>
+  
+              }
+
+            </div>
+            
                 
             :
             <div>
