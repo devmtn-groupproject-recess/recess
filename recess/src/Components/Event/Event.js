@@ -85,7 +85,8 @@ function Event(props) {
   }
 
   let handleprofile = (id) => {
-    if(id === props.user.user_id){
+    console.log(898989, props.user)
+    if(id === props.user.data.user_id){
       props.history.push(`/profile/${id}`)
     }
     else{
@@ -157,7 +158,7 @@ function Event(props) {
                   {Number(event.event_creator_id) === Number(props.user.data.user_id) &&
                   <div>
                     <button onClick={ () => handleDelete()} >Delete Event</button>  
-                    <button onClick={ () => props.history.push(`/events/edit/${props.match.params.user_id}`)}>Edit Event</button>
+                    <button onClick={ () => props.history.push(`/events/edit/${props.match.params.event_id}`)}>Edit Event</button>
                   </div>
 
   
