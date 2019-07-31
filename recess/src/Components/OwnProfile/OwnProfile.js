@@ -22,7 +22,7 @@ function OwnProfile(props) {
               <h2>{props.selected.username}</h2>
               <h3>{`${props.selected.user_city}, ${props.selected.user_state}`}</h3>
               <h3>Sports</h3>
-              <button onClick={() => props.history.push(`/profile/edit/${props.match.params.user_id}`)}>Edit</button>
+              <button className="btn" onClick={() => props.history.push(`/profile/edit/${props.match.params.user_id}`)}>Edit</button>
             </div>
 
           }
