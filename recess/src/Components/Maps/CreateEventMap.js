@@ -12,8 +12,8 @@ const Key = process.env.REACT_APP_GOOGLE_API_KEY
 export default function CreateEventMap () {
 const [location, setLocation] = useState()
 useEffect(() => {
-      axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${Key}`)
-      .then(result => setLocation({lat: result.data.location.lat, lng: result.data.location.lng}))
+      // axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${Key}`)
+      // .then(result => setLocation({lat: result.data.location.lat, lng: result.data.location.lng}))
   }, [])
   
 
