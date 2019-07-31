@@ -81,7 +81,7 @@ function CreateEvent(props) {
             // console.log(marker.getPosition().lat())
             setEventInfo({
 
-                         ...current, 
+                         ...eventInfo, 
                         event_location_long: marker.getPosition().lng(), 
                         event_location_lat: marker.getPosition().lat(),
                         })
@@ -108,15 +108,20 @@ function CreateEvent(props) {
         onMount: addMarkers(linksfromthedepths)
       }
       const MemoMap = useCallback(<Map{...mapProps} />, [eventInfo.location])
-      console.log(`User: ${props.user} Location: ${eventInfo.location}`)
     return(
         <div>
             {props.user? 
             <div>
               { eventInfo.location &&
                 <div>
+                  {MemoMap}
+
+                </div>
+
+
+              }
+                <div>
                     {/* <Map {...mapProps}  /> */}
-                    {MemoMap}
                     <input className="input"
                     placeholder='Event Name'
                     type='text'
@@ -213,7 +218,7 @@ function CreateEvent(props) {
   
                 </div>
   
-              }
+              
 
             </div>
             
