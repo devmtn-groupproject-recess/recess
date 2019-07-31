@@ -11,8 +11,8 @@
 }
 
 .button {
-    height: 40px;
-    width: 60px;
+    height: 60px;
+    width: 90px;
     border-radius: 12px;
     background-color: indigo;
     margin: 10px;
@@ -23,4 +23,20 @@
 
 .planner {
     border: 5px solid indigo;
+    margin: 50px;
+    background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
+    text-align: center;
+}
+
+.title {
+    font-family: 'Black Ops One', cursive;
+    margin-top: 50px;
+    font-style: italic;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: gold;
+}
+
+.eventDeets{   
+    font-family: 'Oswald', sans-serif;
+    font-style: italic;
 }

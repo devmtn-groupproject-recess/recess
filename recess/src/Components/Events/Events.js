@@ -35,11 +35,12 @@ function Events (props) {
 
     return(
         <div className="bracketBoard">
-            <button className="button" onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
+            
             {props.users ?
 
             <div className="planner">
-                <h1>Upcoming Events</h1>
+                <h1 className="title">Upcoming Events</h1>
+                <button className="button" onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
                 {events && events!== true &&
                 events.filter( se => {
                   return new Date(se.event_date) > new Date()
@@ -55,9 +56,9 @@ function Events (props) {
                 
                     return(
                       <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                        <h3>{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
-                        <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
-                        <p>{`${showDate} ${showTime}`}</p>
+                        <h3 className="eventDeets">{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
+                        <p className="eventDeets">{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
+                        <p className="eventDeets">{`${showDate} ${showTime}`}</p>
                       </div>
                     )
                   })
