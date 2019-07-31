@@ -86,6 +86,16 @@ function Event(props) {
       props.createMessage({message_content:messageBody.message_content}, props.match.params.event_id)
   }
 
+  let handleprofile = (id) => {
+    console.log(898989, props.user)
+    if(id === props.user.data.user_id){
+      props.history.push(`/profile/${id}`)
+    }
+    else{
+      props.history.push(`/otherprofile/${id}`)
+    }
+  }
+
 
   
   let {event} = props
@@ -148,8 +158,11 @@ function Event(props) {
                   }
   
                   {Number(event.event_creator_id) === Number(props.user.data.user_id) &&
-  
-                  <button onClick={ () => handleDelete()} >Delete Event</button>  
+                  <div>
+                    <button onClick={ () => handleDelete()} >Delete Event</button>  
+                    <button onClick={ () => props.history.push(`/events/edit/${props.match.params.event_id}`)}>Edit Event</button>
+                  </div>
+
   
                   }
 
@@ -163,7 +176,12 @@ function Event(props) {
                 <div>
                   {props.messages.map((oldMessage, index) => {
                     // console.log(111111, oldMessage)
-                    return <ul key={index}><b>{oldMessage.username}: </b>{oldMessage.message_content}</ul>
+                    return (
+                    <div >
+                      <p  onClick={() => handleprofile(oldMessage.user_id)}  key={index}><b>{oldMessage.username}: </b>{oldMessage.message_content}</p>
+                    </div>
+                      
+                    )
                   })}
                 </div>
 

@@ -80,7 +80,7 @@ function CreateEvent(props) {
             // console.log(marker.getPosition().lat())
             setEventInfo({
 
-                         ...current, 
+                         ...eventInfo, 
                         event_location_long: marker.getPosition().lng(), 
                         event_location_lat: marker.getPosition().lat(),
                         })
@@ -113,8 +113,14 @@ function CreateEvent(props) {
             <div>
               { eventInfo.location &&
                 <div>
+                  {MemoMap}
+
+                </div>
+
+
+              }
+                <div>
                     {/* <Map {...mapProps}  /> */}
-                    {MemoMap}
                     <input className="input"
                     placeholder='Event Name'
                     type='text'
@@ -212,7 +218,7 @@ function CreateEvent(props) {
   
                 </div>
   
-              }
+              
 
             </div>
             
