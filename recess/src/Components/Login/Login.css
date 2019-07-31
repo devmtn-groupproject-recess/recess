@@ -1,9 +1,10 @@
 .bg {
+    height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     background-image: url('https://recess-group.s3-us-west-2.amazonaws.com/7602065_sports-and-recreation-la-palmas-central-park-scott-feinblatt.jpg');
-    z-index: 1;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -18,6 +19,7 @@
     background-image: linear-gradient(to bottom right, indigo, white);
     font-family: 'Black Ops One', cursive;
     color: gold;
+    z-index: 10;
 }
 
 .username {
