@@ -15,13 +15,17 @@ function OwnProfile(props) {
       <div>
       { props.user ? 
         <div className='background'>
-          <div className="playerCard">
-            <img className="profilePic" src={props.user.data.user_img}/>
-            <h1>{`${props.user.data.user_first_name} ${props.user.data.user_last_name}`}</h1>
-            <h2>{props.user.data.username}</h2>
-            <h3>{`${props.user.data.user_city}, ${props.user.data.user_state}`}</h3>
-            <h3>Sports</h3>
-          </div>
+          {props.selected && props.selected.user_img &&
+            <div className="playerCard">
+              <img className="profilePic" src={props.selected.user_img}/>
+              <h1>{`${props.selected.user_first_name} ${props.selected.user_last_name}`}</h1>
+              <h2>{props.selected.username}</h2>
+              <h3>{`${props.selected.user_city}, ${props.selected.user_state}`}</h3>
+              <h3>Sports</h3>
+              <button onClick={() => props.history.push(`/profile/edit/${props.match.params.user_id}`)}>Edit</button>
+            </div>
+
+          }
         </div>
         : 
         <Redirect to='/'/>

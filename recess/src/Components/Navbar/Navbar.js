@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import './Navbar.css'
 import {logout, checkUser} from '../../Redux/reducers/users'
 import {connect} from 'react-redux'
@@ -16,30 +16,29 @@ function Navbar(props) {
     props.logout()
   }
 
-  console.log(props.user)
+  console.log(props)
+
 
     return(
       <div className="navbar">
         <i className="logo">RECESS</i>
         {props.user && props.user.data && 
-        <div>
-            <nav >
-                <div>
+        
+            <nav className='someName' >
                   <label for="toggle" class="label">&#9776;</label>
                   <input type="checkbox" id="toggle"/>
+                
                   <div class="menu">
-                    <Link to="/home" className="words">Home</Link>
-                    <Link to="/events" className="words">Events</Link>
-                    <Link to={`/profile/${props.user.data.user_id}`} className="words">Profile</Link>
+                    <p onClick={ () => props.history.push("/home")} className="words">Home</p>
+                    <p onClick={ () => props.history.push("/events")} className="words">Events</p>
+                    <p onClick={ () => props.history.push(`/profile/${props.user.data.user_id}`)} className="words">Profile</p>
                     <p className="words" onClick={handleLogout}>Logout</p>
                   </div>
-                </div>
+                
             </nav>
             
-            <br/>
-            <br/>
-            <br/>
-          </div>
+            
+         
         }
       </div>  
     )
@@ -57,4 +56,4 @@ function Navbar(props) {
       user: state.users.data
     }
   }
-  export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
