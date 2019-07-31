@@ -9,7 +9,9 @@ function EditEvent(props) {
     let [editedInfo, setEditedInfo] = useState({
         event_name:'',
         event_type:'',
-        event_date:'',
+        // event_date:'',
+        event_edit_time: '',
+        event_edit_date: '',
         event_description:'',
         event_city:'',
         event_state:'',
@@ -27,14 +29,16 @@ function EditEvent(props) {
         }
         if(props.event) {
             setEditedInfo({
+                ...editedInfo,
                 event_name: props.event.event_name,
                 event_type:props.event.event_type,
-                event_date:props.event.event_date,
                 event_description:props.event.event_description,
                 event_city:props.event.event_city,
                 event_state:props.event.event_state,
                 event_location_lat:props.event.event_location_lat,
                 event_location_long:props.event.event_location_long,
+                event_edit_time:'',
+                event_edit_time: ''
             })
         }
 
@@ -56,24 +60,37 @@ function EditEvent(props) {
       let handleType =(name, type) => {
         setEditedInfo({
             ...editedInfo,
-            [name]: type
+            [name]: type,
 
         })
     }
 
     let handleEdit = async () => {
         console.log("New Props: ", props)
+        const newDate = `${editedInfo.event_edit_date} ${editedInfo.event_edit_time}:00`
+    // setEditedInfo({
+    //     ...editedInfo,
+    //     event_date: newDate
+    // })
+
     for( let key in editedInfo){
       let input = editedInfo[key]
+      console.log(input)
         if (!input){
             return alert('All fields must be filled in')
         }
     }
-    await props.editEvent(props.match.params.event_id, editedInfo)
+
+    // console.log(newDate)
+    
+
+    console.log(editedInfo)
+    
+    await props.editEvent(props.match.params.event_id, {...editedInfo, event_date: newDate})
     setEditedInfo({
         event_name:'',
         event_type:'',
-        event_date:'',
+        // event_date:'',
         event_description:'',
         event_city:'',
         event_state:'',
@@ -114,23 +131,23 @@ function EditEvent(props) {
                     
                     <br/> 
 
-                    {/* <input className="input"
+                    <input className="input"
                     placeholder='YYYY-MM-DD'
-                    value={editedInfo.event_date}
+                    value={editedInfo.event_edit_date}
                     type='text'
-                    name='event_date'
+                    name='event_edit_date'
                     onChange={(event) => handleChange(event)}
                     /> 
                     <br/> 
 
                     <input className="input"
-                    value={editedInfo.event}
+                    value={editedInfo.event_edit_time}
                     placeholder='HH:MM'
                     type='text'
-                    name='event_time'
+                    name='event_edit_time'
                     onChange={(event) => handleChange(event)}
                     /> 
-                    <br/>  */}
+                    <br/> 
 
                     <input className="input"
                     value={editedInfo.event_description}
