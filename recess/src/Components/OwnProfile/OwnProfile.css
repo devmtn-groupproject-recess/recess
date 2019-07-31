@@ -28,6 +28,17 @@
     margin: 50px
 }
 
+.btn {
+    height: 40px;
+    width: 60px;
+    border-radius: 12px;
+    background-color: indigo;
+    margin: 10px;
+    font-family: 'Black Ops One', cursive;
+    color: gold;
+    border: 5px solid indigo;
+}
+
 @media screen and (max-width: 500px) {
    
 }
