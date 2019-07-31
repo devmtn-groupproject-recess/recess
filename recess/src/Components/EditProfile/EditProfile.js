@@ -160,8 +160,7 @@ function EditProfile(props) {
 
       :
       
-      //   <Redirect to='/home' />
-      <div>ladeda</div>
+        <Redirect to='/' />
       }
       </div>
 

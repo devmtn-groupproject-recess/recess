@@ -94,6 +94,7 @@ app.put('/api/messages/:event_id/:message_id', messagesCtrl.editMessage)
 app.delete('/api/messages/:event_id/:message_id', messagesCtrl.deleteMessage)
 
 app.get('/api/events', eventsCtrl.getEvents)
+app.get('/api/user_created_events', eventsCtrl.getUserCreatedEvents)
 app.get('/api/events/:event_id', eventsCtrl.getEvent)
 app.get('/api/subscribed_events', eventsCtrl.getSubscribedEvents)
 app.post('/api/events/subscribe/:event_id', eventsCtrl.checkSubscribedEvents, eventsCtrl.subscribeToEvent)
