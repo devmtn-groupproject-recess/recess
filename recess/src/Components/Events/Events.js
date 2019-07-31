@@ -56,7 +56,7 @@ function Events (props) {
                 
                     return(
                       <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                        <h3 className="eventDeets">{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
+                        <h3 className="eventsDetails">{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
                         <p className="eventDeets">{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
                         <p className="eventDeets">{`${showDate} ${showTime}`}</p>
                       </div>
