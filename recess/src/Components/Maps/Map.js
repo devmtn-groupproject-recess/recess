@@ -1,6 +1,6 @@
 //this is the base map component 
 import React, { useEffect, useRef} from 'react'
-import {isEqual, omit, functions} from 'lodash'
+//import {isEqual, omit, functions} from 'lodash'
 const Key = process.env.REACT_APP_GOOGLE_API_KEY
 
 
@@ -52,9 +52,9 @@ export default function Map({ options, onMount, className }) {
 
 
 
-Map.defaultProps = {
-    options: {
-      center: { lat: 48, lng: 8 },
-      zoom: 5,
-    },
-}
+// Map.defaultProps = {
+//     options: {
+//       center: { lat: 48, lng: 8 },
+//       zoom: 5,
+//     },
+// }

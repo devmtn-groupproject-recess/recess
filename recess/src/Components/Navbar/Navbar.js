@@ -8,15 +8,11 @@ function Navbar(props) {
 
   useEffect( () => {
     props.checkUser()
-    console.log('Hit Navbar')
   }, [])
 
   let handleLogout = () => {
-    console.log("hit")
     props.logout()
   }
-
-  console.log(props)
 
 
     return(
@@ -51,7 +47,6 @@ function Navbar(props) {
   }
 
   let mapStateToProps = state => {
-    console.log(state)
     return {
       user: state.users.data
     }
