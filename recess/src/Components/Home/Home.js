@@ -12,9 +12,7 @@ function Home(props) {
     props.getSubscribedEvents()
   }, [])
 
-  console.log(props)
   const {events} = props
-  console.log(3434343, events)
   
 
   return (
@@ -25,7 +23,6 @@ function Home(props) {
           
           {events && events!== true &&
           events.filter( se => {
-            console.log(2323, events)
             return new Date(se.event_date) > new Date()
           })
           .sort( (a, b) => {
@@ -54,7 +51,6 @@ function Home(props) {
             return a.event_date > b.event_date ? -1: a.event_date < b.event_date ? 1: 0
           })
           .map( (singleEvent, index) => {
-            console.log(singleEvent)
             let timeDate = new Date(singleEvent.event_date)
             let showTime = timeDate.toLocaleTimeString()
             let showDate = timeDate.toLocaleDateString()
@@ -80,7 +76,6 @@ function Home(props) {
 }
 
 let mapStateToProps = state => {
-  console.log(state)
   return{
     user: state.users.data,
     events: state.events.data

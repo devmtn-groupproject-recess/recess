@@ -6,27 +6,38 @@ import {checkUser} from '../../Redux/reducers/users'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {createMessage, getMessages} from '../../Redux/reducers/messages'
+import Map from '../Maps/Map'
 
 function Event(props) {
 
   let [messageBody, setMessageBody] = useState({
     messages: [],
-    message_content:''
+    message_content:'',
+    // waste:0
   })
-
+  let [location, setLocation] = useState()
+  
   // let socket = io(`/events/${props.match.params.event_id}`)
 
-  useEffect(   () => {
-    props.checkUser()
-    props.checkUserSubscribedEvents(props.match.params.event_id)
-    props.getEvent(props.match.params.event_id)
-    props.getMessages(props.match.params.event_id)
-    
-    // socket.on('chat-message', message => {
+  useEffect(() => {
+        // socket.on('chat-message', message => {
     //   setMessageBody({
     //     messages: [message, ...messageBody.messages]  
     //   })
     // })
+   
+    props.checkUser()
+    props.checkUserSubscribedEvents(props.match.params.event_id)
+    props.getMessages(props.match.params.event_id)
+    
+    
+    
+    async function fetch(){
+      const res = await props.getEvent(props.match.params.event_id)
+      .then(res => setLocation({lat: +res.value.data.event_location_lat, lng: +res.value.data.event_location_long}))
+    }
+    fetch()
+    
   }, [])
 
   let handleSubscribeToEvent = () => {
@@ -51,7 +62,6 @@ function Event(props) {
       ...messageBody,
       [name]: value 
     })
-    console.log(messageBody)
   }
 
   // let handleSubmit = e => {
@@ -74,20 +84,46 @@ function Event(props) {
       props.createMessage({message_content:messageBody.message_content}, props.match.params.event_id)
   }
 
-  console.log(props)
 
   
   let {event} = props
-
-  
+  const addMarkers = links => map => {
+    links.forEach((link, index) => {
+        
+      const marker = new window.google.maps.Marker({
+        map,
+        position: location,
+        label: `${index + 1}`,
+        title: link.title,
+        
+      })
+      marker.addListener(`click`, () => {
+        window.location.href = link.url
+      })
+    })
+  }
+  let linksfromthedepths = [{
+      title: 'For the Glory',
+      url: 'hereisURL',
+      coords: location
+  }]
+  let mapProps = {
+    options: {
+      center: location,
+      zoom: 15,
+    },
+    onMount: addMarkers(linksfromthedepths)
+  }
   return (
     <div className='message-box'> 
       {props.user ?
       <div>
-        {props.event &&
+        {props.event && 
           <div>
+            
             <div className="googleMap">
-              <h1>Map Goes Here</h1>            
+              <h1>Map Goes Here</h1>
+              { location ? <Map {...mapProps}></Map>  :null  }
             </div>
             <div className="eventInfo">
               
@@ -158,7 +194,6 @@ function Event(props) {
 }
 
 let mapStateToProps = state => {
-  console.log(state)
   return {
     event: state.events.selected,
     user: state.users.data,
