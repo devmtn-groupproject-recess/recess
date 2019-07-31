@@ -105,7 +105,7 @@ function CreateEvent(props) {
           center: eventInfo.location,
           zoom: 15,
         },
-        onMount: addMarkers(linksfromthedepths, eventInfo)
+        onMount: addMarkers(linksfromthedepths)
       }
       const MemoMap = useCallback(<Map{...mapProps} />, [eventInfo.location])
 
