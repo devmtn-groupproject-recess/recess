@@ -1,121 +1,97 @@
-import React, {useEffect, useState, useCallback} from 'react'
-import './CreateEvent.css'
+import React, {useState, useEffect} from 'react'
+import {checkUser} from '../../Redux/reducers/users'
+import {getEvent, editEvent} from '../../Redux/reducers/events'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {checkUser} from '../../Redux/reducers/users'
-import {createEvent} from '../../Redux/reducers/events'
-import axios from 'axios'
-import Map from '../Maps/Map'
 
-const Key = process.env.REACT_APP_GOOGLE_API_KEY
+function EditEvent(props) {
 
-function CreateEvent(props) {
-    console.log('render')
-    
-    let [eventInfo, setEventInfo] = useState({
-        event_name: '',
-        event_type: '',
-        event_date: '',
-        event_time: '',
-        event_description: '',
-        event_location_lat: null,
-        event_location_long: null,
-        event_city: '',
+    let [editedInfo, setEditedInfo] = useState({
+        event_name:'',
+        event_type:'',
+        event_date:'',
+        event_description:'',
+        event_city:'',
         event_state:'',
-        location: null
+        event_location_lat:'',
+        event_location_long:'',
     })
-    console.log(eventInfo)
-    useEffect( () => {
-        console.log('hello')
-        props.checkUser()
-        axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${Key}`)
-        .then(result => setEventInfo({...eventInfo, location: {lat: result.data.location.lat, lng: result.data.location.lng}}))
-        },[])
 
-    let handleChange = useCallback((event) => {
+    console.log(props)
+    console.log(editedInfo)
+
+    useEffect( () => {
+        if(!props.event) {
+            props.checkUser()
+            props.getEvent(props.match.params.event_id)
+        }
+        if(props.event) {
+            setEditedInfo({
+                event_name: props.event.event_name,
+                event_type:props.event.event_type,
+                event_date:props.event.event_date,
+                event_description:props.event.event_description,
+                event_city:props.event.event_city,
+                event_state:props.event.event_state,
+                event_location_lat:props.event.event_location_lat,
+                event_location_long:props.event.event_location_long,
+            })
+        }
+
+    },[])
+
+    const {user, event} = props
+    
+    let handleChange = event => {
         const {name, value} = event.target
-        setEventInfo({
-          ...eventInfo,
+        setEditedInfo({
+          ...editedInfo,
           [name]: value 
         })
+        console.log(editedInfo)
+    }
         
-      })
+      
 
-    let handleType =(name, type) => {
-        setEventInfo({
-            ...eventInfo,
+      let handleType =(name, type) => {
+        setEditedInfo({
+            ...editedInfo,
             [name]: type
 
         })
     }
 
-    let handleCreate = () => {
-        props.createEvent(eventInfo)
-        props.history.push('/home')
+    let handleEdit = async () => {
+        console.log("New Props: ", props)
+    for( let key in editedInfo){
+      let input = editedInfo[key]
+        if (!input){
+            return alert('All fields must be filled in')
+        }
     }
-    // let handleDrag = (lat, long) => {
-    //     console.log(444444, lat, long)
-    //      setEventInfo({
-             
-    //          ...eventInfo, 
-    //         event_location_long: long, 
-    //         event_location_lat: lat,
-    //         })
-    // }
-    
-      const addMarkers = (links, current) => map => {
-        links.forEach((link, index) => {
-
-          const marker = new window.google.maps.Marker({
-            map,
-            position: eventInfo.location,
-            label: `${index + 1}`,
-            title: link.title,
-            draggable: true,
-            crossOnDrag: false,
-            
-          })
-          marker.addListener('dragend', () => {
-            //handleDrag(marker.getPosition().lat(), marker.getPosition().lng()) 
-            // console.log(marker.getPosition().lng())
-            // console.log(marker.getPosition().lat())
-            setEventInfo({
-
-                         ...current, 
-                        event_location_long: marker.getPosition().lng(), 
-                        event_location_lat: marker.getPosition().lat(),
-                        })
-           
-        })
-
-          marker.addListener(`click`, () => {
-            console.log(eventInfo)
-            // console.log(marker.getPosition().lng())
-            // console.log(marker.getPosition().lat())
-          })
-        })
-      }
-      let linksfromthedepths = [{
-          title: 'For the Glory',
-          url: 'hereisURL',
-          coords: eventInfo.location
-      }]
-        let mapProps = {
-        options: {
-          center: eventInfo.location,
-          zoom: 15,
-        },
-        onMount: addMarkers(linksfromthedepths, eventInfo)
-      }
-      const MemoMap = useCallback(<Map{...mapProps} />, [eventInfo.location])
+    await props.editEvent(props.match.params.event_id, editedInfo)
+    setEditedInfo({
+        event_name:'',
+        event_type:'',
+        event_date:'',
+        event_description:'',
+        event_city:'',
+        event_state:'',
+        event_location_lat:'',
+        event_location_long:'',
+    })
+    window.history.back()
+    }
 
     return(
         <div>
-            {props.user && eventInfo.location?
+            {props.user ?
+            // eventInfo.location?
                 <div>
                     {/* <Map {...mapProps}  /> */}
-                    {MemoMap}
+                    {/* {MemoMap} */}
                     <input className="input"
+                    value={editedInfo.event_name}
                     placeholder='Event Name'
                     type='text'
                     name='event_name'
@@ -127,7 +103,7 @@ function CreateEvent(props) {
                         class="input"
                         placeholder='Event Type'
                         name='event_type'
-                        value={eventInfo.event_type} 
+                        value={editedInfo.event_type} 
                         />
                         <div class="dropdown-content">
                             <p onClick={() => handleType('event_type',"Basketball")}>Basketball</p>
@@ -138,8 +114,9 @@ function CreateEvent(props) {
                     
                     <br/> 
 
-                    <input className="input"
+                    {/* <input className="input"
                     placeholder='YYYY-MM-DD'
+                    value={editedInfo.event_date}
                     type='text'
                     name='event_date'
                     onChange={(event) => handleChange(event)}
@@ -147,14 +124,16 @@ function CreateEvent(props) {
                     <br/> 
 
                     <input className="input"
+                    value={editedInfo.event}
                     placeholder='HH:MM'
                     type='text'
                     name='event_time'
                     onChange={(event) => handleChange(event)}
                     /> 
-                    <br/> 
+                    <br/>  */}
 
                     <input className="input"
+                    value={editedInfo.event_description}
                     placeholder='Description'
                     type='text'
                     name='event_description'
@@ -192,12 +171,14 @@ function CreateEvent(props) {
                     
                     <input className="input"
                     placeholder='City'
+                    value={editedInfo.event_city}
                     type='text'
                     name='event_city'
                     onChange={(event) => handleChange(event)}
                     /> 
                     <br/>  
                     <input className="input"
+                    value={editedInfo.event_state}
                     placeholder='State'
                     type='text'
                     name='event_state'
@@ -205,7 +186,7 @@ function CreateEvent(props) {
                     />  
                     <br/> 
                     <button className="btn"
-                    onClick={ () => handleCreate()}>Create</button>
+                    onClick={ () => handleEdit()}>Save</button>
                     <button className='btn'
                     onClick={ () => window.history.back()}>Back</button>
 
@@ -213,8 +194,8 @@ function CreateEvent(props) {
                 
             :
             <div>
-              <Redirect to='/' />
 
+                <Redirect to='/' />
             </div>
             }
 
@@ -224,12 +205,16 @@ function CreateEvent(props) {
 
 let mapDispatchToProps = {
     checkUser,
-    createEvent
+    getEvent,
+    editEvent
 }
 
 let mapStateToProps = state => {
-    return{
-        user:state.users.data
+    console.log(state)
+    return {
+        user: state.users.data,
+        event: state.events.selected
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(CreateEvent)
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditEvent)

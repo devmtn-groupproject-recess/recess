@@ -158,7 +158,9 @@ module.exports = {
                 event_date,
                 event_description,
                 event_location_lat,
-                event_location_long
+                event_location_long,
+                event_state,
+                event_city
             } = req.body
             const updatedEvent = await db.edit_event({
                 event_creator_id,
@@ -168,9 +170,11 @@ module.exports = {
                 event_description,
                 event_location_lat,
                 event_location_long,
-                event_id
+                event_id,
+                event_state,
+                event_city
             })
-            res.status(200).send("Event Edited")
+            res.status(200).send(updatedEvent)
         }catch(error) {
             console.log('Error in events Ctrl (editEvent)', error)
             res.status(409).send(error)
