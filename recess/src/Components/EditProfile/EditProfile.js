@@ -70,7 +70,7 @@ function EditProfile(props) {
       user_phone: '',
       user_img: ''
     })
-    props.history.push('/home')
+    props.history.push(`/profile/${props.match.params.user_id}`)
   }
   
   let setUserPic = (url) => {

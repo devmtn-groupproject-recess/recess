@@ -23,6 +23,7 @@ module.exports = {
         try{
             if(req.session.user) {
                 const db = req.app.get('db')
+                console.log(88888, req.session.user)
                 const {user_id} = req.session.user
                 const {
                     user_first_name,
@@ -32,7 +33,7 @@ module.exports = {
                     user_state,
                     user_zip,
                     user_phone
-                } = req.body.userInfo
+                } = req.body
 
                 let response = await db.edit_user({
                     user_id,
@@ -49,7 +50,11 @@ module.exports = {
 
                 delete user.password
 
-                res.status(200).send(user)
+                await function(){
+                    req.sesion.user = user
+                }
+
+                res.status(200).send(req.session.user)
             }else {
                 res.status(409).send("No user logged in")
             }

@@ -259,7 +259,7 @@ export function logout() {
 export function editUser(userInfo) {
     return {
         type: EDIT_USER,
-        payload: Axios.post(`user/editUser`, userInfo)
+        payload: Axios.put(`user/editUser`, userInfo)
     }
 }
 
