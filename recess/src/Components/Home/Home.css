@@ -1,5 +1,57 @@
+.scoreboard {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://recess-group.s3-us-west-2.amazonaws.com/scoreboard.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
+.eigt1 {
+    width: 450px; 
+    border: 5px solid indigo;
+    font-family: 'Oswald', sans-serif;
+    font-style: italic;
+    background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
+    text-align: center;
+    margin: 50px 0
+}
+
+.eigtTitle {
+    font-family: 'Black Ops One', cursive;
+    margin-top: 50px;
+    font-style: italic;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: gold;
+}
+
+.eventDetails {
+    border-top: 1px solid whitesmoke;
+    font-style: italic;
+    margin-top: 10px 0;
+    padding: 10px 0
+   
+}
+
+.padme {
+    margin: 0px;
+}
 
 @media screen and (max-width: 500px) {
-   
+    .scoreboard {
+        height: 100%
+    }
+
+    .eigt1 {
+        width: 90vw; 
+        border: 5px solid indigo;
+        font-family: 'Oswald', sans-serif;
+        font-style: italic;
+        background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
+        text-align: center;
+        margin-top: 50px
+    }
 }
