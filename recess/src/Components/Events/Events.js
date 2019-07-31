@@ -5,6 +5,7 @@ import {checkUser} from '../../Redux/reducers/users'
 // import axios from 'axios'
 // import Map from '../Maps/Map'
 import {Redirect} from 'react-router-dom'
+import './Events.css'
 
 
 // import Frisbee from '../../assets/Frisbee.png'
@@ -33,12 +34,13 @@ function Events (props) {
     const Key = process.env.REACT_APP_GOOGLE_API_KEY
 
     return(
-        <div>
-            <button onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
+        <div className="bracketBoard">
+            
             {props.users ?
 
-            <div>
-                <h1>Upcoming Events</h1>
+            <div className="planner">
+                <h1 className="title">Upcoming Events</h1>
+                <button className="button" onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
                 {events && events!== true &&
                 events.filter( se => {
                   return new Date(se.event_date) > new Date()
@@ -54,9 +56,9 @@ function Events (props) {
                 
                     return(
                       <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                        <h3>{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
-                        <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
-                        <p>{`${showDate} ${showTime}`}</p>
+                        <h3 className="eventDeets">{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
+                        <p className="eventDeets">{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
+                        <p className="eventDeets">{`${showDate} ${showTime}`}</p>
                       </div>
                     )
                   })
@@ -77,7 +79,7 @@ let mapStateToProps = state => {
     console.log(999999999999999, state)
     return{
         events: state.events.data,
-        users: state.users.data.data
+        users: state.users.data
     }
 }
 export default connect(mapStateToProps, {getEvents, checkUser})(Events)
