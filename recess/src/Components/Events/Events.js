@@ -5,6 +5,7 @@ import {checkUser} from '../../Redux/reducers/users'
 // import axios from 'axios'
 // import Map from '../Maps/Map'
 import {Redirect} from 'react-router-dom'
+import './Events.css'
 
 
 // import Frisbee from '../../assets/Frisbee.png'
@@ -33,11 +34,11 @@ function Events (props) {
     const Key = process.env.REACT_APP_GOOGLE_API_KEY
 
     return(
-        <div>
-            <button onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
+        <div className="bracketBoard">
+            <button className="button" onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
             {props.users ?
 
-            <div>
+            <div className="planner">
                 <h1>Upcoming Events</h1>
                 {events && events!== true &&
                 events.filter( se => {
@@ -77,7 +78,7 @@ let mapStateToProps = state => {
     console.log(999999999999999, state)
     return{
         events: state.events.data,
-        users: state.users.data.data
+        users: state.users.data
     }
 }
 export default connect(mapStateToProps, {getEvents, checkUser})(Events)

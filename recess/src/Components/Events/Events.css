@@ -1,0 +1,26 @@
+.bracketBoard {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://recess-group.s3-us-west-2.amazonaws.com/eventsbg.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.button {
+    height: 40px;
+    width: 60px;
+    border-radius: 12px;
+    background-color: indigo;
+    margin: 10px;
+    font-family: 'Black Ops One', cursive;
+    color: gold;
+    border: 5px solid indigo;
+}
+
+.planner {
+    border: 5px solid indigo;
+}
