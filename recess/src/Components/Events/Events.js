@@ -2,40 +2,68 @@ import React,{useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {getEvents} from '../../Redux/reducers/events'
 import {checkUser} from '../../Redux/reducers/users'
-// import axios from 'axios'
-// import Map from '../Maps/Map'
+import axios from 'axios'
+import Map from '../Maps/Map'
 import {Redirect} from 'react-router-dom'
 import './Events.css'
 
 
-// import Frisbee from '../../assets/Frisbee.png'
-// import Football from '../../assets/Football.png'
-// import Basketball from '../../assets/Basketball.png'
-// import Baseball from '../../assets/Baseball.png'
-// import Volleyball from '../../assets/Volleyball.png'
-// import Spikeball from '../../assets/Spikeball.png'
-// import Soccer from '../../assets/Soccer.png'
+import Frisbee from '../../assets/Frisbee.png'
+import Football from '../../assets/Football.png'
+import Basketball from '../../assets/Basketball.png'
+import Baseball from '../../assets/Baseball.png'
+import Volleyball from '../../assets/Volleyball.png'
+import Spikeball from '../../assets/Spikeball.png'
+import Soccer from '../../assets/Soccer.png'
+
+const Key = process.env.REACT_APP_GOOGLE_API_KEY
 
 function Events (props) {
 
-    // const [location, setLocation] = useState()
+    const [location, setLocation] = useState()
 
 
     useEffect(() => {
         props.checkUser()
         props.getEvents()
-        console.log(33333, props.events)
-    //     axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${Key}`)
-    //   .then(result => 
-    //     setLocation({lat: +result.data.location.lat, lng: +result.data.location.lng}))
+        axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${Key}`)
+        .then(result => 
+        setLocation({lat: +result.data.location.lat, lng: +result.data.location.lng}))
     }, [])
+ const addMarkers = links => map => {
+    links.forEach((link, index) => {
+      console.log(link)
+      const marker = new window.google.maps.Marker({
+        map,
+        position: {lat: +link.event_location_lat, lng: +link.event_location_long},
+        label: `${index + 1}`,
+        title: link.event_name,
+        icon: {url: `${link.event_type}`,
+              scaledSize: new window.google.maps.Size(50, 55)
+      },
 
+      })
+      const infoWindow = new window.google.maps.InfoWindow({
+        content: `<h1>${link.event_name}</h1>`
+      })
+      marker.addListener(`click`, () => {
+        infoWindow.open(map, marker)
+      })  
+    })
+}
     const {events} = props
-    const Key = process.env.REACT_APP_GOOGLE_API_KEY
+    let mapProps = {
+        options: {
+          center: location,
+          zoom: 14,
+        },
+        onMount: addMarkers(events)
+      }
 
     return(
-        <div className="bracketBoard">
-            
+        <div>
+            <Map {...mapProps}></Map>
+            <button onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
             {props.users ?
 
             <div className="planner">
@@ -49,7 +77,6 @@ function Events (props) {
                   return a.event_date > b.event_date ? -1: a.event_date < b.event_date ? 1: 0
                 })
                 .map( (singleEvent, index) => {
-                  console.log(singleEvent)
                   let timeDate = new Date(singleEvent.event_date)
                   let showTime = timeDate.toLocaleTimeString()
                   let showDate = timeDate.toLocaleDateString()
@@ -76,7 +103,6 @@ function Events (props) {
 }
 
 let mapStateToProps = state => {
-    console.log(999999999999999, state)
     return{
         events: state.events.data,
         users: state.users.data
@@ -85,44 +111,6 @@ let mapStateToProps = state => {
 export default connect(mapStateToProps, {getEvents, checkUser})(Events)
 
   
-//   const addMarkers = links => map => {
-//     links.forEach((link, index) => {
-//       const marker = new window.google.maps.Marker({
-        
-//         map,
-//         position: {lat: +link.event_location_lat, lng: +link.event_location_long},
-//         label: `${index + 1}`,
-//         title: link.event_name,
-//         icon: {url: `${link.event_type}`,
-//               scaledSize: new window.google.maps.Size(50, 55)
-//       },
-
-//       })
-//       console.log(marker)
-//       const infoWindow = new window.google.maps.InfoWindow({
-//         content: `<h1>${link.event_name}</h1>`
-//       })
-//       marker.addListener(`click`, () => {
-//         infoWindow.open(map, marker)
-//       })  
-//     })
-// }
-
-// let mapProps = {
-//         options: {
-//           center: location,
-//           zoom: 15,
-//         },
-//         onMount: addMarkers(props.events)
-//       }
-// return(
-//     props.events && location ? <Map {...mapProps}></Map> : null
-//     )
-// }  
-
-
-
-
 
 /*
 "/static/media/Frisbee.6c4391c4.png"
