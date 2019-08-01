@@ -15,6 +15,7 @@ function Home(props) {
   const [location, setLocation] = useState()
   const [subscribedGames, setSubGames] = useState([])
 
+
   useEffect(() => {
     props.checkUser()
     
@@ -65,7 +66,9 @@ function Home(props) {
           center: location,
           zoom: 14,
         },
-       onMount: addMarkers(subscribedGames)
+       onMount: addMarkers(subscribedGames.filter( se => {
+        return new Date(se.event_date) > new Date()
+      }))
       }
 
   return (
@@ -76,7 +79,7 @@ function Home(props) {
       { props.user ?
         <div className="eigt1">
           <div className='extra'>
-            <h1 className="eigtTitle">Events I'm Going To:</h1>
+            <h1 className="eigtTitle">Upcoming Games</h1>
 
           </div>
           
@@ -94,15 +97,20 @@ function Home(props) {
 
               return(
                 <div className="padme eventDetails" key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
+                  <div>
+                  <img height='100px' src={singleEvent.event_type} />
+                  </div>
+                  <div>
                   <h3 className="">{`${singleEvent.event_name}`}</h3>
                   <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
                   <p>{`${showDate} ${showTime}`}</p>
+                  </div>
                 </div>
               )
             })
           }
           <div className='extra' >
-            <h1 className="eigtTitle">Events I've Gone To:</h1>
+            <h1 className="eigtTitle">Past Games</h1>
 
           </div>
           {events && events!== true &&
@@ -119,9 +127,14 @@ function Home(props) {
 
               return(
                 <div  className="eventDetails" key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
+                   <div>
+                          <img height='100px' src={singleEvent.event_type} />
+                  </div>
+                  <div>
                   <h3>{`${singleEvent.event_name}`}</h3>
                   <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
                   <p>{`${showDate} ${showTime}`}</p>
+                  </div>
                 </div>
               )
             })

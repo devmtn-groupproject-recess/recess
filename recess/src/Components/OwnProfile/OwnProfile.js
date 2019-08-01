@@ -27,7 +27,7 @@ function OwnProfile(props) {
               <button id='more' className="btn" onClick={() => props.history.push(`/profile/edit/${props.match.params.user_id}`)}>Edit</button>
               {props.events && 
                 <div>
-                  <h1 className="letteringSport">Events I Created:</h1>
+                  <h1 className="letteringSport">Games I Created</h1>
                   {props.events.map( (singleEvent, index) => {
                     let timeDate = new Date(singleEvent.event_date)
                     let showTime = timeDate.toLocaleTimeString()

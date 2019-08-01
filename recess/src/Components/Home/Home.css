@@ -43,7 +43,8 @@
 
 .eventDetails {
     border-bottom: 1px solid whitesmoke;
-
+    display: flex;
+    justify-content: space-between;
     font-style: italic;
     margin-top: 5% 0;
     padding: 5% 0;

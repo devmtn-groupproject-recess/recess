@@ -72,18 +72,21 @@ function Events (props) {
           center: location,
           zoom: 14,
         },
-     onMount: addMarkers(games)
+     onMount: addMarkers(games.filter( se => {
+            return new Date(se.event_date) > new Date()
+          }))
       }
 
     return(
         <div className='bracketBoard'>
+        
             {games ?<Map className='mapComp' {...mapProps}></Map>: null}
             {/* <button onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button> */}
             {props.users ?
 
             <div className="planner">
-                <h1 className="title">Upcoming Events</h1>
-                <button className="button" onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
+                <h1 className="title">Upcoming Games</h1>
+                <button className="button" onClick={ () => props.history.push('/events/createEvent')}>Create A Game</button>
                 {events && events!== true &&
                 events.filter( se => {
                   return new Date(se.event_date) > new Date()
