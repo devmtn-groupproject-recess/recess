@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import {checkUser} from '../../Redux/reducers/users'
 import {getEvent, editEvent} from '../../Redux/reducers/events'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import Map from '../Maps/Map'
 
 import Frisbee from '../../assets/Frisbee.png'
 import Football from '../../assets/Football.png'
@@ -26,6 +27,7 @@ function EditEvent(props) {
         event_location_lat:'',
         event_location_long:'',
     })
+    let [location, setLocation] = useState()
 
     console.log(props)
     console.log(editedInfo)
@@ -49,6 +51,11 @@ function EditEvent(props) {
                 event_edit_time: ''
             })
         }
+        async function fetch(){
+            const res = await props.getEvent(props.match.params.event_id)
+            .then(res => setLocation({lat: +res.value.data.event_location_lat, lng: +res.value.data.event_location_long}))
+          }
+          fetch()
 
     },[])
 
@@ -108,13 +115,61 @@ function EditEvent(props) {
     window.history.back()
     }
 
+    const addMarkers = links => map => {
+        links.forEach((link, index) => {
+            
+          const marker = new window.google.maps.Marker({
+            map,
+            position: {lat: +link.event_location_lat, lng: +link.event_location_long},
+            label: `${index + 1}`,
+            title: link.title,
+            icon: {url: `${link.event_type}`,
+              scaledSize: new window.google.maps.Size(50, 55)
+            },
+            draggable: true,
+            crossOnDrag: false
+          })
+          marker.addListener(`click`, () => {
+            //window.location.href = link.url
+            console.log(editedInfo)
+          })
+          marker.addListener('dragend', () => {
+            //handleDrag(marker.getPosition().lat(), marker.getPosition().lng()) 
+            // console.log(marker.getPosition().lng())
+            // console.log(marker.getPosition().lat())
+            setEditedInfo({
+
+                         ...editedInfo, 
+                        event_location_long: marker.getPosition().lng(), 
+                        event_location_lat: marker.getPosition().lat(),
+                        })
+           
+        })
+
+          marker.addListener(`click`, () => {
+            // console.log(eventInfo)
+            // console.log(marker.getPosition().lng())
+            // console.log(marker.getPosition().lat())
+          })
+        })
+      }
+    
+      let mapProps = {
+        options: {
+          center: location,
+          zoom: 15,
+        },
+        onMount: addMarkers([event])}
+
+      const MemoMap = useCallback(<Map{...mapProps} />, [location])
+// editedInfo.event_location_lat, editedInfo.event_location_long
     return(
         <div>
             {props.user ?
             // eventInfo.location?
                 <div>
                     {/* <Map {...mapProps}  /> */}
-                    {/* {MemoMap} */}
+                    {MemoMap}
                     <input className="input"
                     value={editedInfo.event_name}
                     placeholder='Event Name'
