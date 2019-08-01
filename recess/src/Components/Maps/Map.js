@@ -32,7 +32,7 @@ export default function Map({ options, onMount, className }) {
     <div
             
       {...props}
-      style={{ height: `80vh`, margin: `1em 0`, borderRadius: `0.5em` }}>
+      style={{ height: `80vh`, margin: `0em 0`, borderRadius: `0.5em` }}>
       
       </div>
     

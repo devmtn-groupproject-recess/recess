@@ -1,0 +1,27 @@
+.theBigDiv {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
+    
+}
+
+.containerWrapper {
+    width: 90%;
+    margin: 5% 0;
+}
+
+.borderDiv {
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.allInputDivs {
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.moreInput {
+    width:33%;
+}
