@@ -25,7 +25,7 @@ function OwnProfile(props) {
               <h3 className="letteringText">{`${props.selected.user_city}, ${props.selected.user_state}`}</h3>
               <h3 className="letteringText">Sports</h3>
               <button id='more' className="btn" onClick={() => props.history.push(`/profile/edit/${props.match.params.user_id}`)}>Edit</button>
-              {props.events && 
+              {props.events && props.events !== true &&
                 <div>
                   <h1 className="letteringSport">Games I Created</h1>
                   {props.events.map( (singleEvent, index) => {
