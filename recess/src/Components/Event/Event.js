@@ -15,7 +15,6 @@ function Event(props) {
   let [messageBody, setMessageBody] = useState({
     messages: [],
     message_content:'',
-    // waste:0
   })
   let [location, setLocation] = useState()
   
@@ -111,24 +110,24 @@ function Event(props) {
         position: location,
         label: `${index + 1}`,
         title: link.title,
+        icon: {url: `${link.event_type}`,
+        scaledSize: new window.google.maps.Size(50, 55)
+      },
         
       })
       marker.addListener(`click`, () => {
-        window.location.href = link.url
+        //window.location.href = link.url
+        console.log(event)
       })
     })
   }
-  let linksfromthedepths = [{
-      title: 'For the Glory',
-      url: 'hereisURL',
-      coords: location
-  }]
+  
   let mapProps = {
     options: {
       center: location,
       zoom: 15,
     },
-    onMount: addMarkers(linksfromthedepths)
+    onMount: addMarkers([event])
   }
   return (
     <div className='event'> 
