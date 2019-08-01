@@ -24,7 +24,7 @@ function OwnProfile(props) {
               <h2 className="letteringText">{props.selected.username}</h2>
               <h3 className="letteringText">{`${props.selected.user_city}, ${props.selected.user_state}`}</h3>
               <h3 className="letteringText">Sports</h3>
-              <button className="btn" onClick={() => props.history.push(`/profile/edit/${props.match.params.user_id}`)}>Edit</button>
+              <button id='more' className="btn" onClick={() => props.history.push(`/profile/edit/${props.match.params.user_id}`)}>Edit</button>
               {props.events && 
                 <div>
                   <h1 className="letteringSport">Events I Created:</h1>
@@ -34,8 +34,8 @@ function OwnProfile(props) {
                     let showDate = timeDate.toLocaleDateString()
                   
                       return(
-                        <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                          <h3 className="letteringText">{`${singleEvent.event_name} - ${singleEvent.event_type}`}</h3>
+                        <div className='indEvent' key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
+                          <h3 className="letteringText">{`${singleEvent.event_name}`}</h3>
                           <p className="letteringText">{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
                           <p className="letteringText">{`${showDate} ${showTime}`}</p>
                         </div>

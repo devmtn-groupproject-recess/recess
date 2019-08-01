@@ -66,13 +66,16 @@ function Home(props) {
       }
 
   return (
-    <div>
-    {subscribedGames ? <Map {...mapProps}></Map> : null}
+    <div className='home'>
     <div className="scoreboard">
+    {subscribedGames ? <Map className='mapComp' {...mapProps}></Map> : null}
       
       { props.user ?
         <div className="eigt1">
-          <h1 className="eigtTitle">Events I'm Going To:</h1>
+          <div className='extra'>
+            <h1 className="eigtTitle">Events I'm Going To:</h1>
+
+          </div>
           
           {events && events!== true &&
           events.filter( se => {
@@ -87,15 +90,18 @@ function Home(props) {
             let showDate = timeDate.toLocaleDateString()
 
               return(
-                <div className="padme" key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                  <h3 className="eventDetails">{`${singleEvent.event_name}`}</h3>
+                <div className="padme eventDetails" key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
+                  <h3 className="">{`${singleEvent.event_name}`}</h3>
                   <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
                   <p>{`${showDate} ${showTime}`}</p>
                 </div>
               )
             })
           }
-          <h1 className="eigtTitle">Events I've Gone To:</h1>
+          <div className='extra' >
+            <h1 className="eigtTitle">Events I've Gone To:</h1>
+
+          </div>
           {events && events!== true &&
           events.filter( se => {
             return new Date(se.event_date) < new Date()
@@ -109,8 +115,8 @@ function Home(props) {
             let showDate = timeDate.toLocaleDateString()
 
               return(
-                <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                  <h3 className="eventDetails">{`${singleEvent.event_name}`}</h3>
+                <div  className="eventDetails" key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
+                  <h3>{`${singleEvent.event_name}`}</h3>
                   <p>{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
                   <p>{`${showDate} ${showTime}`}</p>
                 </div>
