@@ -84,6 +84,10 @@ function Event(props) {
 
   let handleSubmit = () => {
       props.createMessage({message_content:messageBody.message_content}, props.match.params.event_id)
+      setMessageBody({
+        ...messageBody,
+        message_content: ''
+      })
   }
 
   let handleprofile = (id) => {
@@ -127,40 +131,33 @@ function Event(props) {
     onMount: addMarkers(linksfromthedepths)
   }
   return (
-    <div className='message-box'> 
+    <div className='event'> 
       {props.user ?
-      <div>
+      <div className='event2'>
         {props.event && 
-          <div>
+          <div className='contentWrapper'>
             
             <div className="googleMap">
-              <h1>Map Goes Here</h1>
-              { location ? <Map {...mapProps}></Map>  :null  }
+              { location ? <Map className='mapComp' {...mapProps}></Map>  :null  }
             </div>
             <div className="eventInfo">
               
-              <h3>{event.event_name}</h3>
-              <p><b>Sport Type</b>: {event.event_type}</p>
-              <p><b>Date</b>: {new Date(event.event_date).toLocaleDateString()}</p>
-              <p><b>Time</b>: {new Date(event.event_date).toLocaleTimeString()}</p>
-              <p> <b>Description</b>: {event.event_description}</p>
-              <p><b>Location</b>: {`${event.event_city}, ${event.event_state}`}</p>
-              <button onClick={() => window.history.back()}>Back</button>
               {new Date(event.event_date) > new Date() &&
                 <div>
+                  <button className='btnn' onClick={() => window.history.back()}>Back</button>
                   {props.subscribedEvent ?
   
-                  <button onClick={() => handleUnsubscribeToEvent()}>Unsubscribe</button>
+                  <button className='btnn' onClick={() => handleUnsubscribeToEvent()}>Unsubscribe</button>
   
                   :
                 
-                  <button onClick={ () => handleSubscribeToEvent()}>Subscribe</button>
+                  <button className='btnn' onClick={ () => handleSubscribeToEvent()}>Subscribe</button>
                   }
   
                   {Number(event.event_creator_id) === Number(props.user.data.user_id) &&
                   <div>
-                    <button onClick={ () => handleDelete()} >Delete Event</button>  
-                    <button onClick={ () => props.history.push(`/events/edit/${props.match.params.event_id}`)}>Edit Event</button>
+                    <button className='btnn' onClick={ () => handleDelete()} >Delete Event</button>  
+                    <button className='btnn' onClick={ () => props.history.push(`/events/edit/${props.match.params.event_id}`)}>Edit Event</button>
                   </div>
 
   
@@ -169,8 +166,15 @@ function Event(props) {
                 </div>
 
               }
+              <h3 className='eventTitle'>{event.event_name}</h3>
+              <p className='eventInfo'><b>Sport Type</b>: {event.event_type}</p>
+              <p className='eventInfo'><b>Date</b>: {new Date(event.event_date).toLocaleDateString()}</p>
+              <p className='eventInfo'><b>Time</b>: {new Date(event.event_date).toLocaleTimeString()}</p>
+              <p className='eventInfo'> <b>Description</b>: {event.event_description}</p>
+              <p className='eventInfo'><b>Location</b>: {`${event.event_city}, ${event.event_state}`}</p>
             </div>
-            <div className="chatBox"><h1>The Huddle</h1>
+            <div className="chatBox">
+              <h1 id='border' className='eventTitle '>The Huddle</h1>
               <div>
                 { props.messages && 
                 <div>
@@ -178,7 +182,9 @@ function Event(props) {
                     // console.log(111111, oldMessage)
                     return (
                     <div >
-                      <p  onClick={() => handleprofile(oldMessage.user_id)}  key={index}><b>{oldMessage.username}: </b>{oldMessage.message_content}</p>
+                      <p className='messageText' onClick={() => handleprofile(oldMessage.user_id)}  key={index}>
+                      <b>{`${oldMessage.username} (${new Date(oldMessage.message_date).toLocaleDateString()} ${new Date(oldMessage.message_date).toLocaleTimeString()}) : `}</b>{oldMessage.message_content}
+                      </p>
                     </div>
                       
                     )
@@ -193,9 +199,11 @@ function Event(props) {
                   })
                 }
                 </div>  */}
-                
-                <input type='text' name='message_content'placeholder='Enter a message...' onChange={ (e) => handleChange(e)}/>
-                <button onClick={ () => handleSubmit()}>Add Message</button>
+                <div className='inputDiv'>
+                  <input className='messageInput' type='text' value={messageBody.message_content} name='message_content'placeholder='Enter a message...' onChange={ (e) => handleChange(e)}/>
+                  <button className=' btnn' onClick={ () => handleSubmit()}>Add Message</button>
+
+                </div>
               </div>
             </div>
           </div>

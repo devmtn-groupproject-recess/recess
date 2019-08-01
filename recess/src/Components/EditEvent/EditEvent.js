@@ -4,6 +4,14 @@ import {getEvent, editEvent} from '../../Redux/reducers/events'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
+import Frisbee from '../../assets/Frisbee.png'
+import Football from '../../assets/Football.png'
+import Basketball from '../../assets/Basketball.png'
+import Baseball from '../../assets/Baseball.png'
+import Volleyball from '../../assets/Volleyball.png'
+import Spikeball from '../../assets/Spikeball.png'
+import Soccer from '../../assets/Soccer.png'
+
 function EditEvent(props) {
 
     let [editedInfo, setEditedInfo] = useState({
@@ -123,9 +131,14 @@ function EditEvent(props) {
                         value={editedInfo.event_type} 
                         />
                         <div class="dropdown-content">
-                            <p onClick={() => handleType('event_type',"Basketball")}>Basketball</p>
-                            {/* <p>Link 1</p>
-                            <p>Link 1</p> */}
+                            <p onClick={() => handleType('event_type', Basketball)}>Basketball</p>
+                            <p onClick={() => handleType('event_type', Frisbee)}>Frisbee</p>
+                            <p onClick={() => handleType('event_type', Football)}>Football</p>
+                            <p onClick={() => handleType('event_type', Baseball)}>Baseball</p>
+                            <p onClick={() => handleType('event_type', Soccer)}>Soccer</p>
+                            <p onClick={() => handleType('event_type', Volleyball)}>Volleyball</p>
+                            <p onClick={() => handleType('event_type', Spikeball)}>Spikeball</p>
+                            
                         </div>
                     </div>
                     
