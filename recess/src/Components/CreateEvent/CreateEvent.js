@@ -77,7 +77,7 @@ function CreateEvent(props) {
           const marker = new window.google.maps.Marker({
             map,
             position: eventInfo.location,
-            label: `${index + 1}`,
+            label: ``,
             title: link.title,
             draggable: true,
             crossOnDrag: false,
@@ -120,7 +120,7 @@ function CreateEvent(props) {
         <div className='outerCreate'>
             {props.user? 
             <div className='createContentDiv'>
-              <h1 className='title'>Create An Event</h1>
+              <h1 className='title'>Add Game</h1>
               { eventInfo.location &&
                 <div className='mapDivContainer'>
                   {MemoMap}
@@ -131,13 +131,13 @@ function CreateEvent(props) {
               }
                 <div className='inputsDivContainer'>
                     <div className='eInfoTitleDiv'>
-                      <h3 className='eInfoTitle'>Event Info:</h3>
+                      <h3 className='eInfoTitle'>Game Info:</h3>
                     </div>
                     {/* <Map {...mapProps}  /> */}
                     <div className='theInputs'>
                       <div className='theDivs'>
                         <input className='ceInput'
-                        placeholder='Event Name'
+                        placeholder='Name'
                         type='text'
                         name='event_name'
                         onChange={(event) => handleChange(event)}
@@ -147,7 +147,7 @@ function CreateEvent(props) {
                             <input
                             readOnly 
                             className='ceInputDD'
-                            placeholder='Event Type'
+                            placeholder='Which Game?'
                             name='event_type'
                             value={eventInfo.event_type} 
                             />
@@ -216,7 +216,7 @@ function CreateEvent(props) {
                       <br/> 
                       <div className='theDivs'>
                         <button className="btn"
-                        onClick={ () => handleCreate()}>Create</button>
+                        onClick={ () => handleCreate()}>Add</button>
                         <button className='btn'
                         onClick={ () => window.history.back()}>Back</button>
 

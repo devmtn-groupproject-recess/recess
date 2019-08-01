@@ -86,7 +86,7 @@ function Events (props) {
 
             <div className="planner">
                 <h1 className="title">Upcoming Games</h1>
-                <button className="button" onClick={ () => props.history.push('/events/createEvent')}>Create A Game</button>
+                <button className="button" onClick={ () => props.history.push('/events/createEvent')}>Add Game</button>
                 {events && events!== true &&
                 events.filter( se => {
                   return new Date(se.event_date) > new Date()

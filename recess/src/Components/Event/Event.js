@@ -156,8 +156,8 @@ function Event(props) {
   
                   {Number(event.event_creator_id) === Number(props.user.data.user_id) &&
                   <div className='innerBtnDiv1'>
-                    <button className='btnn' onClick={ () => handleDelete()} >Delete Event</button>  
-                    <button className='btnn' onClick={ () => props.history.push(`/events/edit/${props.match.params.event_id}`)}>Edit Event</button>
+                    <button className='btnn' onClick={ () => handleDelete()} >Cancel Game</button>  
+                    <button className='btnn' onClick={ () => props.history.push(`/events/edit/${props.match.params.event_id}`)}>Edit Game Details</button>
                   </div>
 
   

@@ -60,7 +60,7 @@ function Login(props) {
         />  
         <input className="password"
           placeholder='Password'
-          type='text'
+          type='password'
           name='password'
           onChange={(event) => handleChange(event)}
           /> 
