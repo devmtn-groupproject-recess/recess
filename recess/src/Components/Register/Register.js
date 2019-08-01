@@ -76,6 +76,7 @@ function Register(props) {
       
       <div className='registerBox'>
         <h1 className="header">Welcome! Please Create An Account!</h1>
+        <div className="letteringText" onClick={() => props.history.push('/')}>Already Have An Account? Log In Here.</div>
         {registerInfo.user_img ?
         
         <img src={registerInfo.user_img} />
@@ -92,7 +93,7 @@ function Register(props) {
           name='user_first_name'
           onChange={(event) => handleChange(event)}
         />
-        <br/> 
+        
         <input className="input"
           placeholder='Last Name'
           type='text'
@@ -106,7 +107,7 @@ function Register(props) {
           name='user_address'
           onChange={(event) => handleChange(event)}
         />
-        <br/>   
+          
         <input className="input"
           placeholder='City'
           type='text'
@@ -120,7 +121,7 @@ function Register(props) {
           name='user_state'
           onChange={(event) => handleChange(event)}
         /> 
-        <br/>  
+        
         <input className="input"
           placeholder='Zip Code'
           type='number'
@@ -133,14 +134,8 @@ function Register(props) {
           type='text'
           name='user_phone'
           onChange={(event) => handleChange(event)}
-        /> 
-        <br/>  
-        {/* <input 
-          placeholder='Image Url'
-          type='text'
-          name='user_img'
-          onChange={(event) => handleChange(event)}
-        />   */}
+        />  
+        
         <input className="input"
           placeholder='Username'
           type='text'
@@ -158,9 +153,8 @@ function Register(props) {
         <button className="btn"
          onClick={ () => handleRegister()}>Create</button>
       </div>
-      }
-      <br/> 
-      <div className="login" onClick={() => props.history.push('/')}>Already Have An Account? Log In Here.</div>
+      } 
+      
     </div>
 
   )
