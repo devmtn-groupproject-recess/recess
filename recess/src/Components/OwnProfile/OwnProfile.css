@@ -32,11 +32,11 @@
     height: 40px;
     width: 60px;
     border-radius: 12px;
-    background-color: indigo;
+    background-color: whitesmoke;
     margin: 10px;
-    font-family: 'Black Ops One', cursive;
-    color: gold;
-    border: 5px solid indigo;
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    border: 1px solid black;
 }
 
 .letteringSport {

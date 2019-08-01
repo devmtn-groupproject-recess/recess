@@ -17,6 +17,7 @@
     border-radius: 10%;
     text-align: center;
     background-image: linear-gradient(to bottom right, indigo, white);
+    box-shadow: 0px 0px 16px 0px #000000;
     font-family: 'Black Ops One', cursive;
     color: gold;
     z-index: 10;
@@ -35,14 +36,16 @@
 }
 
 .btn {
-    height: 40px;
-    width: 60px;
+    height: 30px;
+    width: 45%;
     border-radius: 12px;
-    background-color: indigo;
+    background-color: whitesmoke;
     margin: 10px;
-    font-family: 'Black Ops One', cursive;
-    color: gold;
-    border: 5px solid indigo;
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    border: 5px solid whitesmoke;
+    box-shadow: 0px 0px 16px 0px #000000;
+
 }
 
 .register {

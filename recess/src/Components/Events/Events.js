@@ -75,9 +75,9 @@ function Events (props) {
       }
 
     return(
-        <div>
-            {games ? <Map {...mapProps}></Map> : null}
-            <button onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
+        <div className='bracketBoard'>
+            {games ?<Map className='mapComp' {...mapProps}></Map>: null}
+            {/* <button onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button> */}
             {props.users ?
 
             <div className="planner">
@@ -88,7 +88,7 @@ function Events (props) {
                   return new Date(se.event_date) > new Date()
                 })
                 .sort( (a, b) => {
-                  return a.event_date > b.event_date ? -1: a.event_date < b.event_date ? 1: 0
+                  return a.event_date < b.event_date ? -1: a.event_date > b.event_date ? 1: 0
                 })
                 .map( (singleEvent, index) => {
                   let timeDate = new Date(singleEvent.event_date)
@@ -96,10 +96,15 @@ function Events (props) {
                   let showDate = timeDate.toLocaleDateString()
                 
                     return(
-                      <div key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
-                        <h3 className="eventDeets">{`${singleEvent.event_name}`}</h3>
-                        <p className="eventDeets">{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
-                        <p className="eventDeets">{`${showDate} ${showTime}`}</p>
+                      <div className='eventRow' key={index} onClick={ () => props.history.push(`/events/${singleEvent.event_id}`)}>
+                        <div>
+                          <img height='100px' src={singleEvent.event_type} />
+                        </div>
+                        <div>
+                          <h3 className="eventDeets">{`${singleEvent.event_name}`}</h3>
+                          <p className="eventDeets">{`${singleEvent.event_city}, ${singleEvent.event_state}`}</p>
+                          <p className="eventDeets">{`${showDate} ${showTime}`}</p>
+                        </div>
                       </div>
                     )
                   })
