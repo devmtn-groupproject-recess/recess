@@ -42,12 +42,11 @@ function Events (props) {
     }, [])
 
  const addMarkers = links => map => {
-   console.log(555, links)
     links.forEach((link, index) => {
       const marker = new window.google.maps.Marker({
         map,
         position: {lat: +link.event_location_lat, lng: +link.event_location_long},
-        label: `${index + 1}`,
+        label: ``,
         title: link.event_name,
         icon: {url: `${link.event_type}`,
               scaledSize: new window.google.maps.Size(50, 55)
@@ -57,12 +56,14 @@ function Events (props) {
   
      
       const infoWindow = new window.google.maps.InfoWindow({
-        content: `<h1>${link.event_name}</h1>`
+        content: `<div style="color:indigo;display:flex;flex-direction:column;align-items:center;justify-content:center"><h2>${link.event_name}</h2><h4>${new Date(link.event_date).toLocaleDateString()}</h4><h4>${new Date(link.event_date).toLocaleTimeString()}</h4></div>`
       })
 
       marker.addListener(`click`, () => {
         infoWindow.open(map, marker)
       })  
+      marker.addListener('dblclick', () => props.history.push(`/events/${link.event_id}`))
+      
     })
 }
     const {events} = props
