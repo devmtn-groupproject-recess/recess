@@ -21,18 +21,29 @@ const Key = process.env.REACT_APP_GOOGLE_API_KEY
 function Events (props) {
 
     const [location, setLocation] = useState()
-
+    const [games, setGames] = useState([])
 
     useEffect(() => {
         props.checkUser()
-        props.getEvents()
+        
+        async function getGames (){
+          const res = await props.getEvents()
+          .then(res => setGames( [...res.value.data]))
+          
+        }
+        getGames()
+        
+
         axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${Key}`)
         .then(result => 
         setLocation({lat: +result.data.location.lat, lng: +result.data.location.lng}))
+
+
     }, [])
+
  const addMarkers = links => map => {
+   console.log(555, links)
     links.forEach((link, index) => {
-      console.log(link)
       const marker = new window.google.maps.Marker({
         map,
         position: {lat: +link.event_location_lat, lng: +link.event_location_long},
@@ -43,9 +54,12 @@ function Events (props) {
       },
 
       })
+  
+     
       const infoWindow = new window.google.maps.InfoWindow({
         content: `<h1>${link.event_name}</h1>`
       })
+
       marker.addListener(`click`, () => {
         infoWindow.open(map, marker)
       })  
@@ -57,12 +71,12 @@ function Events (props) {
           center: location,
           zoom: 14,
         },
-        onMount: addMarkers(events)
+     onMount: addMarkers(games)
       }
 
     return(
         <div>
-            <Map {...mapProps}></Map>
+            {games ? <Map {...mapProps}></Map> : null}
             <button onClick={ () => props.history.push('/events/createEvent')}>Create An Event</button>
             {props.users ?
 
