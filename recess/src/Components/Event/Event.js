@@ -90,7 +90,6 @@ function Event(props) {
   }
 
   let handleprofile = (id) => {
-    console.log(898989, props.user)
     if(id === props.user.data.user_id){
       props.history.push(`/profile/${id}`)
     }
@@ -108,7 +107,7 @@ function Event(props) {
       const marker = new window.google.maps.Marker({
         map,
         position: location,
-        label: `${index + 1}`,
+        label: ``,
         title: link.title,
         icon: {url: `${link.event_type}`,
         scaledSize: new window.google.maps.Size(50, 55)
@@ -117,7 +116,6 @@ function Event(props) {
       })
       marker.addListener(`click`, () => {
         //window.location.href = link.url
-        console.log(event)
       })
     })
   }
@@ -181,7 +179,6 @@ function Event(props) {
                 { props.messages && 
                 <div>
                   {props.messages.map((oldMessage, index) => {
-                    // console.log(111111, oldMessage)
                     return (
                     <div >
                       <p className='messageText' onClick={() => handleprofile(oldMessage.user_id)}  key={index}>

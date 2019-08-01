@@ -30,8 +30,7 @@ function EditEvent(props) {
     })
     let [location, setLocation] = useState()
 
-    console.log(props)
-    console.log(editedInfo)
+  
 
     useEffect( () => {
         if(!props.event) {
@@ -68,7 +67,6 @@ function EditEvent(props) {
           ...editedInfo,
           [name]: value 
         })
-        console.log(editedInfo)
     }
         
       
@@ -82,7 +80,6 @@ function EditEvent(props) {
     }
 
     let handleEdit = async () => {
-        console.log("New Props: ", props)
         const newDate = `${editedInfo.event_edit_date} ${editedInfo.event_edit_time}:00`
     // setEditedInfo({
     //     ...editedInfo,
@@ -91,16 +88,13 @@ function EditEvent(props) {
 
     for( let key in editedInfo){
       let input = editedInfo[key]
-      console.log(input)
         if (!input){
             return alert('All fields must be filled in')
         }
     }
 
-    // console.log(newDate)
     
 
-    console.log(editedInfo)
     
     await props.editEvent(props.match.params.event_id, {...editedInfo, event_date: newDate})
     setEditedInfo({
@@ -122,7 +116,7 @@ function EditEvent(props) {
           const marker = new window.google.maps.Marker({
             map,
             position: {lat: +link.event_location_lat, lng: +link.event_location_long},
-            label: `${index + 1}`,
+            label: ``,
             title: link.title,
             icon: {url: `${link.event_type}`,
               scaledSize: new window.google.maps.Size(50, 55)
@@ -130,28 +124,15 @@ function EditEvent(props) {
             draggable: true,
             crossOnDrag: false
           })
-          marker.addListener(`click`, () => {
-            //window.location.href = link.url
-            console.log(editedInfo)
-          })
+    
           marker.addListener('dragend', () => {
-            //handleDrag(marker.getPosition().lat(), marker.getPosition().lng()) 
-            // console.log(marker.getPosition().lng())
-            // console.log(marker.getPosition().lat())
-            setEditedInfo({
-
+                    setEditedInfo({
                          ...editedInfo, 
                         event_location_long: marker.getPosition().lng(), 
                         event_location_lat: marker.getPosition().lat(),
                         })
            
-        })
-
-          marker.addListener(`click`, () => {
-            // console.log(eventInfo)
-            // console.log(marker.getPosition().lng())
-            // console.log(marker.getPosition().lat())
-          })
+            })
         })
       }
     
@@ -163,7 +144,6 @@ function EditEvent(props) {
         onMount: addMarkers([event])}
 
       const MemoMap = useCallback(<Map{...mapProps} />, [location])
-// editedInfo.event_location_lat, editedInfo.event_location_long
     return(
         <div className='theBigDiv'>
             {props.user ?
@@ -173,7 +153,6 @@ function EditEvent(props) {
                     {/* <Map {...mapProps}  /> */}
                     <div className='borderDiv'>
                       {MemoMap}
-
                     </div>
 
                     <h3 className='title'>Event Info:</h3>
