@@ -134,9 +134,9 @@ module.exports = {
                 event_state
             })
 
-            console.log("Events:" ,eventList)
+            console.log("Event:" ,eventList)
 
-            const event_id =(eventList[eventList.length -1].event_id)
+            const event_id =(eventList[0].event_id)
             console.log(event_id)
 
             const newEventList = await db.subscribe_user_to_event({event_id, user_id: event_creator_id})

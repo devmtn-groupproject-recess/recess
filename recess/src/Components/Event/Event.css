@@ -1,4 +1,88 @@
+.event{
+    width: 100%;
+    background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
+    padding: 5% 0;
+}
 
+.event2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contentWrapper {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.googleMap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}   
+
+.eventInfo {
+    margin: 5% 0;
+}
+
+.eventTitle {
+    font-family: 'Oswald', sans-serif;
+    border-bottom: 3px solid whitesmoke;
+    margin-bottom: 2%;
+    
+}
+
+.eventInfo {
+    font-family: 'Oswald', sans-serif;
+
+}
+
+.chatBox {
+    width:100%;
+    background: whitesmoke;
+    padding: 5%;
+    overflow-wrap: break-word;
+    border-radius: 10px;
+    box-shadow: 0px 0px 16px 0px #000000;
+
+
+}
+
+#border {
+    border-bottom: 3px solid indigo;
+    margin-bottom: 5%;
+}
+
+.messageText {
+    font-family: 'Oswald', sans-serif;
+}
+
+.inputDiv {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.messageInput{
+    margin: 5% 5%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.btnn{
+    margin: 3% 1%;
+    height: 26px;
+    width: 45%;
+    border-radius: 12px;
+    background-color: whitesmoke;
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    border: 1px solid black;
+}
 
 @media screen and (max-width: 500px) {
    
