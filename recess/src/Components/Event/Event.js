@@ -143,18 +143,21 @@ function Event(props) {
               
               {new Date(event.event_date) > new Date() &&
                 <div className='btnContainer'>
-                  <button className='btnn' onClick={() => window.history.back()}>Back</button>
-                  {props.subscribedEvent ?
-  
-                  <button className='btnn' onClick={() => handleUnsubscribeToEvent()}>Unsubscribe</button>
-  
-                  :
-                
-                  <button className='btnn' onClick={ () => handleSubscribeToEvent()}>Subscribe</button>
-                  }
+                  <div className='innerBtnDiv1'>
+                    <button className='btnn' onClick={() => window.history.back()}>Back</button>
+                    {props.subscribedEvent ?
+    
+                    <button className='btnn' onClick={() => handleUnsubscribeToEvent()}>Unsubscribe</button>
+    
+                    :
+                  
+                    <button className='btnn' onClick={ () => handleSubscribeToEvent()}>Subscribe</button>
+                    }
+
+                  </div>
   
                   {Number(event.event_creator_id) === Number(props.user.data.user_id) &&
-                  <div>
+                  <div className='innerBtnDiv1'>
                     <button className='btnn' onClick={ () => handleDelete()} >Delete Event</button>  
                     <button className='btnn' onClick={ () => props.history.push(`/events/edit/${props.match.params.event_id}`)}>Edit Event</button>
                   </div>
@@ -166,7 +169,7 @@ function Event(props) {
 
               }
               <h3 className='eventTitle'>{event.event_name}</h3>
-              <p className='eventInfo'><b>Sport Type</b>: {event.event_type}</p>
+              {/* <p className='eventInfo'><b>Sport Type</b>: {event.event_type}</p> */}
               <p className='eventInfo'><b>Date</b>: {new Date(event.event_date).toLocaleDateString()}</p>
               <p className='eventInfo'><b>Time</b>: {new Date(event.event_date).toLocaleTimeString()}</p>
               <p className='eventInfo'> <b>Description</b>: {event.event_description}</p>

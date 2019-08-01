@@ -4,6 +4,7 @@ import {getEvent, editEvent} from '../../Redux/reducers/events'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Map from '../Maps/Map'
+import './EditEvent.css'
 
 import Frisbee from '../../assets/Frisbee.png'
 import Football from '../../assets/Football.png'
@@ -164,116 +165,111 @@ function EditEvent(props) {
       const MemoMap = useCallback(<Map{...mapProps} />, [location])
 // editedInfo.event_location_lat, editedInfo.event_location_long
     return(
-        <div>
+        <div className='theBigDiv'>
             {props.user ?
             // eventInfo.location?
-                <div>
+                <div className='containerWrapper'>
+                    <h1 className='title'>Edit Event</h1>
                     {/* <Map {...mapProps}  /> */}
-                    {MemoMap}
-                    <input className="input"
-                    value={editedInfo.event_name}
-                    placeholder='Event Name'
-                    type='text'
-                    name='event_name'
-                    onChange={(event) => handleChange(event)}
-                    />
-                    <br/> 
-                    <div class="dropdown">
-                        <input 
-                        class="input"
-                        placeholder='Event Type'
-                        name='event_type'
-                        value={editedInfo.event_type} 
-                        />
-                        <div class="dropdown-content">
-                            <p onClick={() => handleType('event_type', Basketball)}>Basketball</p>
-                            <p onClick={() => handleType('event_type', Frisbee)}>Frisbee</p>
-                            <p onClick={() => handleType('event_type', Football)}>Football</p>
-                            <p onClick={() => handleType('event_type', Baseball)}>Baseball</p>
-                            <p onClick={() => handleType('event_type', Soccer)}>Soccer</p>
-                            <p onClick={() => handleType('event_type', Volleyball)}>Volleyball</p>
-                            <p onClick={() => handleType('event_type', Spikeball)}>Spikeball</p>
-                            
-                        </div>
+                    <div className='borderDiv'>
+                      {MemoMap}
+
+                    </div>
+
+                    <h3 className='title'>Event Info:</h3>
+                    
+                    <div className='allInputDivs'>
+                      <input className="input"
+                      value={editedInfo.event_name}
+                      placeholder='Event Name'
+                      type='text'
+                      name='event_name'
+                      onChange={(event) => handleChange(event)}
+                      />
+                      <br/> 
+                      <div class="dropdown">
+                          <input 
+                          class="input"
+                          placeholder='Event Type'
+                          name='event_type'
+                          value={editedInfo.event_type} 
+                          />
+                          <div class="dropdown-content">
+                              <p onClick={() => handleType('event_type', Basketball)}>Basketball</p>
+                              <p onClick={() => handleType('event_type', Frisbee)}>Frisbee</p>
+                              <p onClick={() => handleType('event_type', Football)}>Football</p>
+                              <p onClick={() => handleType('event_type', Baseball)}>Baseball</p>
+                              <p onClick={() => handleType('event_type', Soccer)}>Soccer</p>
+                              <p onClick={() => handleType('event_type', Volleyball)}>Volleyball</p>
+                              <p onClick={() => handleType('event_type', Spikeball)}>Spikeball</p>
+                              
+                          </div>
+                      </div>
+
                     </div>
                     
                     <br/> 
 
-                    <input className="input"
-                    placeholder='YYYY-MM-DD'
-                    value={editedInfo.event_edit_date}
-                    type='text'
-                    name='event_edit_date'
-                    onChange={(event) => handleChange(event)}
-                    /> 
-                    <br/> 
+                    <div className='allInputDivs'>
+                      <input className="input"
+                      placeholder='YYYY-MM-DD'
+                      value={editedInfo.event_edit_date}
+                      type='text'
+                      name='event_edit_date'
+                      onChange={(event) => handleChange(event)}
+                      /> 
+                      <br/> 
 
-                    <input className="input"
-                    value={editedInfo.event_edit_time}
-                    placeholder='HH:MM'
-                    type='text'
-                    name='event_edit_time'
-                    onChange={(event) => handleChange(event)}
-                    /> 
-                    <br/> 
+                      <input className="input"
+                      value={editedInfo.event_edit_time}
+                      placeholder='HH:MM'
+                      type='text'
+                      name='event_edit_time'
+                      onChange={(event) => handleChange(event)}
+                      /> 
 
-                    <input className="input"
-                    value={editedInfo.event_description}
-                    placeholder='Description'
-                    type='text'
-                    name='event_description'
-                    onChange={(event) => handleChange(event)}
-                    /> 
-                    <br/> 
-
-                    {/* <div class="dropdown">
-                        <input 
-                        class="input"
-                        placeholder='AM/PM'
-                        name='event_amPm'
-                        value={`${eventInfo.event_amPm}`} />
-                        <div class="dropdown-content">
-                            <p onClick={() => handleType('event_amPm','AM')}>"AM"</p>
-                            <p onClick={() => handleType('event_amPm','PM')}>'PM'</p>                          
-                        </div>
                     </div>
-                    <br/>   */}
-                     
-                    {/* <input className="input"
-                    placeholder='Location Latitude'
-                    type='number'
-                    name='event_location_lat'
-                    onChange={(event) => handleChange(event)}
-                    />
-                    <br/>   
-                    <input className="input"
-                    placeholder='Location Longitude'
-                    type='text'
-                    name='event_location_long'
-                    onChange={(event) => handleChange(event)}
-                    /> 
-                    <br/>   */}
-                    
-                    <input className="input"
-                    placeholder='City'
-                    value={editedInfo.event_city}
-                    type='text'
-                    name='event_city'
-                    onChange={(event) => handleChange(event)}
-                    /> 
+
+                    <br/> 
+
+                    <div className='allInputDivs'>
+                      <input className="input"
+                      value={editedInfo.event_description}
+                      placeholder='Description'
+                      type='text'
+                      name='event_description'
+                      onChange={(event) => handleChange(event)}
+                      /> 
+                      <br/> 
+                      
+                      <input className="input"
+                      placeholder='City'
+                      value={editedInfo.event_city}
+                      type='text'
+                      name='event_city'
+                      onChange={(event) => handleChange(event)}
+                      /> 
+
+                    </div>
+
                     <br/>  
-                    <input className="input"
-                    value={editedInfo.event_state}
-                    placeholder='State'
-                    type='text'
-                    name='event_state'
-                    onChange={(event) => handleChange(event)}
-                    />  
-                    <br/> 
-                    <button className="btn"
-                    onClick={ () => handleEdit()}>Save</button>
-                    <button className='btn'
-                    onClick={ () => window.history.back()}>Back</button>
+                    <div className='lastInputDiv'>
+                      <input className="input"
+                      value={editedInfo.event_state}
+                      placeholder='State'
+                      type='text'
+                      name='event_state'
+                      onChange={(event) => handleChange(event)}
+                      />  
+
+                    </div>
+                    <br/>
+                    <div>
+                      <button className="btn"
+                      onClick={ () => handleEdit()}>Save</button>
+                      <button className='btn'
+                      onClick={ () => window.history.back()}>Back</button>
+                    </div> 
 
                 </div>
                 

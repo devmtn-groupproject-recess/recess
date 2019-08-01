@@ -117,118 +117,111 @@ function CreateEvent(props) {
       }
       const MemoMap = useCallback(<Map{...mapProps} />, [eventInfo.location])
     return(
-        <div>
+        <div className='outerCreate'>
             {props.user? 
-            <div>
+            <div className='createContentDiv'>
+              <h1 className='title'>Create An Event</h1>
               { eventInfo.location &&
-                <div>
+                <div className='mapDivContainer'>
                   {MemoMap}
 
                 </div>
 
 
               }
-                <div>
+                <div className='inputsDivContainer'>
+                    <div className='eInfoTitleDiv'>
+                      <h3 className='eInfoTitle'>Event Info:</h3>
+                    </div>
                     {/* <Map {...mapProps}  /> */}
-                    <input className="input"
-                    placeholder='Event Name'
-                    type='text'
-                    name='event_name'
-                    onChange={(event) => handleChange(event)}
-                    />
-                    <br/> 
-                    <div class="dropdown">
-                        <input
-                        readOnly 
-                        class="input"
-                        placeholder='Event Type'
-                        name='event_type'
-                        value={eventInfo.event_type} 
+                    <div className='theInputs'>
+                      <div className='theDivs'>
+                        <input className='ceInput'
+                        placeholder='Event Name'
+                        type='text'
+                        name='event_name'
+                        onChange={(event) => handleChange(event)}
                         />
-                        <div class="dropdown-content">
-                            <p onClick={() => handleType('event_type', Basketball, )}>Basketball</p>
-                            <p onClick={() => handleType('event_type', Frisbee)}>Frisbee</p>
-                            <p onClick={() => handleType('event_type', Football)}>Football</p>
-                            <p onClick={() => handleType('event_type', Baseball)}>Baseball</p>
-                            <p onClick={() => handleType('event_type', Soccer)}>Soccer</p>
-                            <p onClick={() => handleType('event_type', Volleyball)}>Volleyball</p>
-                            <p onClick={() => handleType('event_type', Spikeball)}>Spikeball</p>
-                            
+                        <br/> 
+                        <div class="dropdown">
+                            <input
+                            readOnly 
+                            className='ceInputDD'
+                            placeholder='Event Type'
+                            name='event_type'
+                            value={eventInfo.event_type} 
+                            />
+                            <div class="dropdown-content">
+                                <p onClick={() => handleType('event_type', Basketball, )}>Basketball</p>
+                                <p onClick={() => handleType('event_type', Frisbee)}>Frisbee</p>
+                                <p onClick={() => handleType('event_type', Football)}>Football</p>
+                                <p onClick={() => handleType('event_type', Baseball)}>Baseball</p>
+                                <p onClick={() => handleType('event_type', Soccer)}>Soccer</p>
+                                <p onClick={() => handleType('event_type', Volleyball)}>Volleyball</p>
+                                <p onClick={() => handleType('event_type', Spikeball)}>Spikeball</p>
+                                
+                            </div>
                         </div>
+
+                      </div>
+
+                      
+                      <br/> 
+
+                      <div className='theDivs'>
+                        <input className='ceInput'
+                        placeholder='YYYY-MM-DD'
+                        type='text'
+                        name='event_date'
+                        onChange={(event) => handleChange(event)}
+                        /> 
+                        <br/> 
+      
+                        <input className='ceInput'
+                        placeholder='HH:MM'
+                        type='text'
+                        name='event_time'
+                        onChange={(event) => handleChange(event)}
+                        /> 
+
+                      </div>
+    
+                      <br/> 
+
+                      <div className='theDivs'>
+                        <input className='ceInput'
+                        placeholder='Description'
+                        type='text'
+                        name='event_description'
+                        onChange={(event) => handleChange(event)}
+                        /> 
+                        <br/> 
+                        
+                        <input className='ceInput'
+                        placeholder='City'
+                        type='text'
+                        name='event_city'
+                        onChange={(event) => handleChange(event)}
+                        /> 
+
+                      </div>
+    
+                      <br/>  
+                      <input className='ceInput'
+                      placeholder='State'
+                      type='text'
+                      name='event_state'
+                      onChange={(event) => handleChange(event)}
+                      />  
+                      <br/> 
+                      <div className='theDivs'>
+                        <button className="btn"
+                        onClick={ () => handleCreate()}>Create</button>
+                        <button className='btn'
+                        onClick={ () => window.history.back()}>Back</button>
+
+                      </div>
                     </div>
-                    
-                    <br/> 
-  
-                    <input className="input"
-                    placeholder='YYYY-MM-DD'
-                    type='text'
-                    name='event_date'
-                    onChange={(event) => handleChange(event)}
-                    /> 
-                    <br/> 
-  
-                    <input className="input"
-                    placeholder='HH:MM'
-                    type='text'
-                    name='event_time'
-                    onChange={(event) => handleChange(event)}
-                    /> 
-                    <br/> 
-  
-                    <input className="input"
-                    placeholder='Description'
-                    type='text'
-                    name='event_description'
-                    onChange={(event) => handleChange(event)}
-                    /> 
-                    <br/> 
-  
-                    {/* <div class="dropdown">
-                        <input 
-                        class="input"
-                        placeholder='AM/PM'
-                        name='event_amPm'
-                        value={`${eventInfo.event_amPm}`} />
-                        <div class="dropdown-content">
-                            <p onClick={() => handleType('event_amPm','AM')}>"AM"</p>
-                            <p onClick={() => handleType('event_amPm','PM')}>'PM'</p>                          
-                        </div>
-                    </div>
-                    <br/>   */}
-                     
-                    {/* <input className="input"
-                    placeholder='Location Latitude'
-                    type='number'
-                    name='event_location_lat'
-                    onChange={(event) => handleChange(event)}
-                    />
-                    <br/>   
-                    <input className="input"
-                    placeholder='Location Longitude'
-                    type='text'
-                    name='event_location_long'
-                    onChange={(event) => handleChange(event)}
-                    /> 
-                    <br/>   */}
-                    
-                    <input className="input"
-                    placeholder='City'
-                    type='text'
-                    name='event_city'
-                    onChange={(event) => handleChange(event)}
-                    /> 
-                    <br/>  
-                    <input className="input"
-                    placeholder='State'
-                    type='text'
-                    name='event_state'
-                    onChange={(event) => handleChange(event)}
-                    />  
-                    <br/> 
-                    <button className="btn"
-                    onClick={ () => handleCreate()}>Create</button>
-                    <button className='btn'
-                    onClick={ () => window.history.back()}>Back</button>
   
                 </div>
   
