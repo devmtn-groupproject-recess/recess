@@ -143,7 +143,7 @@ function Event(props) {
             <div className="eventInfo">
               
               {new Date(event.event_date) > new Date() &&
-                <div>
+                <div className='btnContainer'>
                   <button className='btnn' onClick={() => window.history.back()}>Back</button>
                   {props.subscribedEvent ?
   
