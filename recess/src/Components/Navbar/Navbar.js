@@ -25,8 +25,8 @@ function Navbar(props) {
                   <input type="checkbox" id="toggle"/>
                 
                   <div class="menu">
-                    <p onClick={ () => props.history.push("/home")} className="words">Home</p>
-                    <p onClick={ () => props.history.push("/events")} className="words">Events</p>
+                    <p onClick={ () => props.history.push("/home")} className="words">My Games</p>
+                    <p onClick={ () => props.history.push("/events")} className="words">All Games</p>
                     <p onClick={ () => props.history.push(`/profile/${props.user.data.user_id}`)} className="words">Profile</p>
                     <p className="words" onClick={handleLogout}>Logout</p>
                   </div>
