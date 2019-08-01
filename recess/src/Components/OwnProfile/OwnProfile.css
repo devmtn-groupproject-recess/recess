@@ -14,7 +14,7 @@
     border: 5px solid indigo;
     text-align: center;
     /* height: 600px; */
-    width: 500px;
+    width: 60%;
     margin: 5% 0;
     padding: 3%;
     background-image: linear-gradient(to bottom right, indigo, darkslateblue, white);
@@ -37,16 +37,28 @@
     font-family: 'Oswald', sans-serif;
     color: black;
     border: 1px solid black;
+    
 }
 
 .letteringSport {
     font-family: 'Black Ops One', cursive;
     color: gold;
+    margin: 5% 0;
 }
 
 .letteringText {
     font-family: 'Oswald', sans-serif;
     font-style: italic;
+}
+
+#more {
+    margin-top: 5%;
+}
+
+.indEvent {
+    margin: 5% 0;
+    border-bottom: 3px solid whitesmoke;
+    padding: 2% 0;
 }
 
 @media screen and (max-width: 500px) {

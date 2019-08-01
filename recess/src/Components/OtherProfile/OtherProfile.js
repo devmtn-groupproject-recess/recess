@@ -18,11 +18,11 @@ function OwnProfile(props) {
         <div className='background'>
           <div className="playerCard">
             <img className="profilePic" src={props.selected.user_img}/>
-            <h1>{`${props.selected.user_first_name} ${props.selected.user_last_name}`}</h1>
+            <h1 className='letteringSport'>{`${props.selected.user_first_name} ${props.selected.user_last_name}`}</h1>
             <h2>{props.selected.username}</h2>
-            <h3>{`${props.selected.user_city}, ${props.selected.user_state}`}</h3>
-            <h3>Sports</h3>
-          <button onClick={ () => window.history.back()}>Back</button>
+            <h3 className='some'>{`${props.selected.user_city}, ${props.selected.user_state}`}</h3>
+            {/* <h3>Sports</h3> */}
+          <button className='some btn' onClick={ () => window.history.back()}>Back</button>
           </div>
         </div>
         : 

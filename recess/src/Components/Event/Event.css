@@ -58,6 +58,7 @@
 
 .messageText {
     font-family: 'Oswald', sans-serif;
+    font-size: .7em;
 }
 
 .inputDiv {
@@ -84,6 +85,21 @@
     border: 1px solid black;
 }
 
-@media screen and (max-width: 500px) {
-   
+.btnContainer {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (min-width: 500px) {
+   .event {
+
+   }
+   .btnn{
+       width: 33%;
+       margin: 0 10%;
+   }
+
+   .eventInfo {
+       margin: 2% 0;
+   }
 }

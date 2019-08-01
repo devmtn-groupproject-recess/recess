@@ -1,4 +1,17 @@
+.background {
+    width: 100%;
+}
 
+.playerCard {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.some {
+    margin: 0 0 5% 0;
+}
 
 @media screen and (max-width: 500px) {
    
